@@ -6,7 +6,7 @@
   "author": "marius321967 <marius.dras@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn run esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap"
+    "build": "esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap",
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
