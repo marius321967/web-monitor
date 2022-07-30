@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "src/"
+  ],
+  "ext": "ts,js",
+  "exec": "yarn build --log-level=warning && node dist/index.js"
+}
