@@ -1,0 +1,20 @@
+{
+  "name": "web-monitor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "git@github.com:marius321967/web-monitor.git",
+  "author": "marius321967 <marius.dras@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/sinon": "^10.0.13",
+    "chai": "^4.3.6",
+    "esbuild": "^0.14.51",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.19",
+    "sinon": "^14.0.0",
+    "typescript": "^4.7.4"
+  }
+}
