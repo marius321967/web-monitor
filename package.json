@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap",
+    "test:unit": "ts-mocha tests/unit/**/*.spec.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
@@ -18,6 +19,7 @@
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "sinon": "^14.0.0",
+    "ts-mocha": "^10.0.0",
     "typescript": "^4.7.4"
   },
   "dependencies": {
