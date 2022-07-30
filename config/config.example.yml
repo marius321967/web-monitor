@@ -1,0 +1,46 @@
+monitors:
+  ssl:
+    label: SSL
+    type: ssl_validity
+    interval: 3 days
+    request: https://example.com
+  contact_form:
+    label: Contact form functionality
+    type: response_code
+    interval: 1 week
+    request:
+      url: https://example.com/form_submit
+      method: POST
+      auth_header: Basic Zm9vOmJhcg==
+    expected_code: 200
+  response_time:
+    label: Contact form functionality
+    type: response_time
+    interval: 2 days
+    request: https://example.com/products
+    threshold: 20 seconds
+  company_contacts:
+    label: Company contacts visible
+    type: content_match
+    interval: 1 week
+    request: https://example.com
+    pattern: mailto:\w+@example.com
+  homepage_loading_time:
+    label: Company contacts visible
+    type: element_match
+    interval: 1 week
+    request: https://example.com
+    pattern: body .contact-form
+
+notify:
+  admin:
+    email: admin@example.com
+  developer_1:
+    email: johndoe@example.com
+
+email_notifier:
+  host: smtp.mailtrap.io
+  port: 2525
+  auth: 
+    user: foo
+    pass: bar
