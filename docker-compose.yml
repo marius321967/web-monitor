@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  prod:
+    image: web-monitor:latest
+    build: .
+    volumes: 
+      - ./config:/app/config
+      - ./logs:/app/logs
+    ports:
+      - 80:80
+    restart: unless-stopped
