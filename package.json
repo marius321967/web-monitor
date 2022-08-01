@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap",
-    "test:unit": "ts-mocha 'tests/unit/**/*.spec.ts'"
+    "test:unit": "ts-mocha 'tests/unit/**/*.spec.ts'",
+    "test:infrastructure": "ts-mocha 'tests/infrastructure/**/*.spec.ts'"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",

@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule give-me-204 204.txt [R=204]

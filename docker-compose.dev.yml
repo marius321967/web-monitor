@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  target:
+    image: httpd:2.4
+    restart: unless-stopped
+    volumes:
+      - ./tests/infrastructure/httpd:/usr/local/apache2/conf/docker
+    networks:
+      web-monitor-dev:
+        aliases:
+          - target
+          - target2
+    command: /usr/local/apache2/conf/docker/entrypoint.sh
+
+networks:
+  web-monitor-dev:
