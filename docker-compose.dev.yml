@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  dev:
+    image: node:18
+    working_dir: /app
+    command: tail -f /dev/null
+    volumes:
+      - ./:/app
+    restart: unless-stopped
+    depends_on: 
+      - target
+    networks:
+      - web-monitor-dev
   infra-test:
     image: node:18
     working_dir: /app
