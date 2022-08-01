@@ -26,7 +26,7 @@ export type ElmentMatchPattern = string;
 export type MonitorRequestConfig = string | {
     url: string
     method: RequestMethod
-    auth_header: string
+    auth_header?: string
 }
 
 export type MonitorSpecificConfig = {
