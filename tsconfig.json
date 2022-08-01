@@ -2,6 +2,7 @@
     "compilerOptions": {
         "esModuleInterop": true,
         "strictNullChecks": true,
+        "baseUrl": "./",
         "paths": {
             "@/*": [ "./src/*" ]
         }
