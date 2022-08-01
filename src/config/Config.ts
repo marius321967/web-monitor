@@ -47,6 +47,12 @@ export type MonitorSpecificConfig = {
     pattern: ElmentMatchPattern
 }
 
+export type SslMonitor = MonitorConfig<MonitorType.ssl_validity>;
+export type ResponseCodeMonitor = MonitorConfig<MonitorType.response_code>;
+export type ResponseTimeMonitor = MonitorConfig<MonitorType.response_time>;
+export type ContentMatchMonitor = MonitorConfig<MonitorType.content_match>;
+export type ElementMatchMonitor = MonitorConfig<MonitorType.element_match>;
+
 export type MonitorConfig<T = MonitorType> = {
     label: string,
     type: T,
