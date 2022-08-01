@@ -1,5 +1,5 @@
-import check from '../../../../src/monitors/checkers/response_code'
-import { MonitorType } from '../../../../src/config/Config'
+import check from '@/monitors/checkers/response_code'
+import { MonitorType } from '@/config/Config'
 import sinon from 'sinon'
 import { assert } from 'chai'
 
