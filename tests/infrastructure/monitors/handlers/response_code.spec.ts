@@ -1,6 +1,5 @@
 import check from '@/monitors/checkers/response_code'
 import { MonitorType } from '@/config/Config'
-import sinon from 'sinon'
 import { assert } from 'chai'
 
 describe('monitors/handlers/response_code', function() {
