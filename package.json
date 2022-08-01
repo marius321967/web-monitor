@@ -14,6 +14,7 @@
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
     "@types/nodemailer": "^6.4.4",
+    "@types/ramda": "^0.28.15",
     "@types/sinon": "^10.0.13",
     "chai": "^4.3.6",
     "esbuild": "^0.14.51",
@@ -26,6 +27,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "fp-ts": "^2.12.2",
-    "nodemailer": "^6.7.7"
+    "nodemailer": "^6.7.7",
+    "ramda": "^0.28.0"
   }
 }
