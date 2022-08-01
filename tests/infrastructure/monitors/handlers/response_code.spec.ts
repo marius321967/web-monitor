@@ -46,6 +46,28 @@ describe('monitors/handlers/response_code', function() {
             .catch(done);
     })
 
+    it('Reports connection failure (host uknown)', done => {
+        check({ ...baseConfig, expected_code: 200, request: 'http://target3' })
+            .then(result => {
+                assert.isNotNull(result);
+                assert.equal(result.message, 'getaddrinfo ENOTFOUND target3')
+
+                done();
+            })
+            .catch(done);
+    })
+
+    it('Reports connection failure (port closed)', done => {
+        check({ ...baseConfig, expected_code: 200, request: 'http://target:8081' })
+            .then(result => {
+                assert.isNotNull(result);
+                assert.match(result.message, /connect ECONNREFUSED (\d+\.\d+\.\d+\.\d+):8081/)
+
+                done();
+            })
+            .catch(done);
+    })
+
     it('Passes an expected code (200)', done => {
         check({ ...baseConfig, expected_code: 200, request: 'http://target/index.txt' })
             .then(result => {
