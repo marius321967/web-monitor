@@ -1,6 +1,14 @@
-import { Method } from 'axios'
-
 export type HttpResponseCode = number;
+
+export enum RequestMethod {
+    GET = 'GET',
+    DELETE = 'DELETE',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    POST = 'POST',
+    PUT = 'PUT',
+    PATCH = 'PATCH'
+}
 
 export enum MonitorType {
     ssl_validity = 'ssl_validity',
@@ -17,7 +25,7 @@ export type ElmentMatchPattern = string;
 
 export type MonitorRequestConfig = string | {
     url: string
-    method: Method
+    method: RequestMethod
     auth_header: string
 }
 
