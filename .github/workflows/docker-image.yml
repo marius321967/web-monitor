@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Unit & Infrastructure Tests
 
 on:
   push:
