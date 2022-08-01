@@ -19,7 +19,7 @@ export enum MonitorType {
 }
 
 export type MonitorInterval = string;
-export type ResponseTimeThreshold= string;
+export type ResponseTimeThreshold = string;
 export type ContentMatchPattern = string;
 export type ElmentMatchPattern = string;
 
