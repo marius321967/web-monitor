@@ -8,6 +8,7 @@ COPY yarn.lock /app/yarn.lock
 RUN yarn install
 
 COPY src/ /app/src
+COPY tsconfig.json /app/tsconfig.json
 
 RUN yarn build
 
