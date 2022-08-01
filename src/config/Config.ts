@@ -23,11 +23,13 @@ export type ResponseTimeThreshold= string;
 export type ContentMatchPattern = string;
 export type ElmentMatchPattern = string;
 
-export type MonitorRequestConfig = string | {
+export type MonitorRequestConfigComplex = {
     url: string
     method: RequestMethod
     auth_header?: string
 }
+
+export type MonitorRequestConfig = string | MonitorRequestConfigComplex;
 
 export type MonitorSpecificConfig = {
     type: MonitorType.ssl_validity
