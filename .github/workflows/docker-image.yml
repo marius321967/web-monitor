@@ -16,8 +16,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run infrastructure tests
       run: >
-        docker-compose 
-          -f docker-compose.dev.yml up 
-          --abort-on-container-exit 
-          --exit-code-from=infra-test 
+        docker-compose \
+          -f docker-compose.dev.yml up \
+          --abort-on-container-exit \
+          --exit-code-from=infra-test \
           infra-test
