@@ -1,8 +1,8 @@
 import { Config } from './config/Config'
-import { MonitorCanceler } from './monitors/CancelMonitor'
+import { MonitorStopper } from './monitors/MonitorStopper'
 import startMonitor, { MonitorStarter } from './monitors/startMonitor'
 
-export type MonitorsStarter = (config: Config) => Promise<MonitorCanceler[]>
+export type MonitorsStarter = (config: Config) => Promise<MonitorStopper[]>
 
 // todo
 export const base = 

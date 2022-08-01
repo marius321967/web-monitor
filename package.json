@@ -7,8 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap",
-    "test:unit": "ts-mocha 'tests/unit/**/*.spec.ts'",
-    "test:infrastructure": "ts-mocha 'tests/infrastructure/**/*.spec.ts'"
+    "ts-mocha": "mocha -r ts-node/register -r tsconfig-paths/register",
+    "test:unit": "yarn ts-mocha 'tests/unit/**/*.spec.ts'",
+    "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'"
   },
   "devDependencies": {
     "@types/chai": "^4.3.1",
@@ -16,6 +17,7 @@
     "@types/nodemailer": "^6.4.4",
     "@types/ramda": "^0.28.15",
     "@types/sinon": "^10.0.13",
+    "axios-mock-adapter": "^1.21.1",
     "chai": "^4.3.6",
     "esbuild": "^0.14.51",
     "mocha": "^10.0.0",

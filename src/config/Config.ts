@@ -1,6 +1,14 @@
-import { Method } from 'axios'
-
 export type HttpResponseCode = number;
+
+export enum RequestMethod {
+    GET = 'GET',
+    DELETE = 'DELETE',
+    HEAD = 'HEAD',
+    OPTIONS = 'OPTIONS',
+    POST = 'POST',
+    PUT = 'PUT',
+    PATCH = 'PATCH'
+}
 
 export enum MonitorType {
     ssl_validity = 'ssl_validity',
@@ -11,15 +19,17 @@ export enum MonitorType {
 }
 
 export type MonitorInterval = string;
-export type ResponseTimeThreshold= string;
+export type ResponseTimeThreshold = string;
 export type ContentMatchPattern = string;
 export type ElmentMatchPattern = string;
 
-export type MonitorRequestConfig = string | {
+export type MonitorRequestConfigComplex = {
     url: string
-    method: Method
-    auth_header: string
+    method: RequestMethod
+    auth_header?: string
 }
+
+export type MonitorRequestConfig = string | MonitorRequestConfigComplex;
 
 export type MonitorSpecificConfig = {
     type: MonitorType.ssl_validity
@@ -36,6 +46,12 @@ export type MonitorSpecificConfig = {
     type: MonitorType.element_match,
     pattern: ElmentMatchPattern
 }
+
+export type SslMonitor = MonitorConfig<MonitorType.ssl_validity>;
+export type ResponseCodeMonitor = MonitorConfig<MonitorType.response_code>;
+export type ResponseTimeMonitor = MonitorConfig<MonitorType.response_time>;
+export type ContentMatchMonitor = MonitorConfig<MonitorType.content_match>;
+export type ElementMatchMonitor = MonitorConfig<MonitorType.element_match>;
 
 export type MonitorConfig<T = MonitorType> = {
     label: string,
