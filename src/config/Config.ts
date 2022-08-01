@@ -37,8 +37,9 @@ export type MonitorSpecificConfig = {
     pattern: ElmentMatchPattern
 }
 
-export type MonitorConfig = {
+export type MonitorConfig<T = MonitorType> = {
     label: string,
+    type: T,
     interval: MonitorInterval,
     request: MonitorRequestConfig
 } & MonitorSpecificConfig;
