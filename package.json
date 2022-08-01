@@ -17,6 +17,7 @@
     "@types/nodemailer": "^6.4.4",
     "@types/ramda": "^0.28.15",
     "@types/sinon": "^10.0.13",
+    "axios-mock-adapter": "^1.21.1",
     "chai": "^4.3.6",
     "esbuild": "^0.14.51",
     "mocha": "^10.0.0",
