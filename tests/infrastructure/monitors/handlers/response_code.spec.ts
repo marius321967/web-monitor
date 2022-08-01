@@ -16,7 +16,7 @@ describe('monitors/handlers/response_code', function() {
         check({ ...baseConfig, expected_code: 200, request: 'http://target/foo' })
             .then(result => {
                 assert.isNotNull(result);
-                assert.equal(result.message, 'Received an unexpected response code: 404')
+                assert.equal((result as Error).message, 'Received an unexpected response code: 404');
 
                 done();
             })
@@ -27,7 +27,7 @@ describe('monitors/handlers/response_code', function() {
         check({ ...baseConfig, expected_code: 200, request: 'http://target/give-me-204' })
             .then(result => {
                 assert.isNotNull(result);
-                assert.equal(result.message, 'Received an unexpected response code: 204')
+                assert.equal((result as Error).message, 'Received an unexpected response code: 204');
 
                 done();
             })
@@ -38,7 +38,7 @@ describe('monitors/handlers/response_code', function() {
         check({ ...baseConfig, expected_code: 204, request: 'http://target/index.txt' })
             .then(result => {
                 assert.isNotNull(result);
-                assert.equal(result.message, 'Received an unexpected response code: 200')
+                assert.equal((result as Error).message, 'Received an unexpected response code: 200');
 
                 done();
             })
@@ -49,7 +49,7 @@ describe('monitors/handlers/response_code', function() {
         check({ ...baseConfig, expected_code: 200, request: 'http://target3' })
             .then(result => {
                 assert.isNotNull(result);
-                assert.equal(result.message, 'getaddrinfo ENOTFOUND target3')
+                assert.equal((result as Error).message, 'getaddrinfo ENOTFOUND target3');
 
                 done();
             })
@@ -60,7 +60,7 @@ describe('monitors/handlers/response_code', function() {
         check({ ...baseConfig, expected_code: 200, request: 'http://target:8081' })
             .then(result => {
                 assert.isNotNull(result);
-                assert.match(result.message, /connect ECONNREFUSED (\d+\.\d+\.\d+\.\d+):8081/)
+                assert.match((result as Error).message, /connect ECONNREFUSED (\d+\.\d+\.\d+\.\d+):8081/);
 
                 done();
             })
