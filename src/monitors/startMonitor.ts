@@ -6,7 +6,7 @@ export type MonitorStarter = (monitorConfig: MonitorConfig) => Promise<MonitorSt
 
 export const base =
     (monitorCheckerRegistry: MonitorCheckerMap): MonitorStarter =>
-    (monitorConfig) => Promise.resolve(null);
+    (monitorConfig) => Promise.resolve(() => {});
 
 // todo
 export default base(monitorCheckerRegistry)
