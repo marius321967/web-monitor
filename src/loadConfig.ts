@@ -12,3 +12,5 @@ export type ConfigLoader = () => Promise<Either<Error, Config>>
 // todo
 export const base = (read: ConfigReader, validate: ConfigValidator): ConfigLoader =>
     () => Promise.resolve({ error: new Error('') }) as any;
+
+export default (() => {}) as ConfigLoader;
