@@ -1,11 +1,16 @@
-import type { Either } from 'fp-ts/Either'
-import type { ConfigFileParser } from './parseYaml'
-import type { ConfigFileReader } from './readFile'
+import { Either, fold, left } from 'fp-ts/Either'
+import parseYaml, { ConfigFileParser } from './parseYaml'
+import readFile, { ConfigFileReader } from './readFile'
 
-/** Reads config, validating its syntax but not structure */
+/** Reads & parses config from source, validating its syntax but not structure */
 export type ConfigReader = () => Promise<Either<Error, any>>
 
-// todo
 export const base = 
-    (readFile: ConfigFileReader, parse: ConfigFileParser): ConfigReader => 
-    () => Promise.resolve('') as any;
+  (readFile: ConfigFileReader, parse: ConfigFileParser): ConfigReader => 
+  () => readFile()
+    .then(fold(
+      (err) => left(err),
+      parse
+    ))
+
+// export default base(readFile, parseYaml)
