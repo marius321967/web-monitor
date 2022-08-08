@@ -18,6 +18,10 @@ jobs:
       uses: borales/actions-yarn@v3.0.0
       with:
         cmd: install
+    - name: Check typing
+      uses: borales/actions-yarn@v3.0.0
+      with:
+        cmd: test:types
     - name: Unit tests
       uses: borales/actions-yarn@v3.0.0
       with:
