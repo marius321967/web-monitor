@@ -13,4 +13,4 @@ export const base =
       parse
     ))
 
-// export default base(readFile, parseYaml)
+export default base(readFile, parseYaml)
