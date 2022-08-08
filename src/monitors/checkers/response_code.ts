@@ -6,7 +6,7 @@ import { flow } from 'fp-ts/lib/function'
 
 const isExpectedCode = (code: number) => (response: AxiosResponse): boolean => equals(response.status, code);
 
-const getResponse = (error: AxiosError): AxiosResponse => error.response;
+const getResponse = (error: AxiosError): AxiosResponse => error.response as AxiosResponse;
 
 const throwUnexpectedCode = (response: AxiosResponse) => new Error(`Received an unexpected response code: ${response.status}`);
 const throwUnexpectedCodeFromError = flow(getResponse, throwUnexpectedCode);
