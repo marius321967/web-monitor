@@ -13,5 +13,4 @@ export const base =
         shutdown();
     }
 
-// todo
 export default base(shutdown)
