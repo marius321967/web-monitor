@@ -1,9 +1,17 @@
+import shutdown, { AppShutdown } from '@/app/shutdown'
+import logger from '@/logger'
+
 export type ConfigFailureHandler = (error: Error) => void
 
 export const base = 
-    (): ConfigFailureHandler => 
+    (shutdown: AppShutdown): ConfigFailureHandler => 
     /** Reports & shuts down the application  */
-    (error) => {}
+    (error) => {
+        logger.error({ message: error });
+        logger.info('Shutting down due to configuration error');
+
+        shutdown();
+    }
 
 // todo
-export default base()
+export default base(shutdown)
