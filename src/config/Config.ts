@@ -19,8 +19,9 @@ export enum MonitorType {
 }
 
 export type IntervalTimeUnit = 'second' | 'seconds' | 'minute' | 'minutes' | 'hour' | 'hours' | 'day' | 'days' | 'week' | 'weeks';
-export type MonitorInterval = `${number} ${IntervalTimeUnit}`;
-export type ResponseTimeThreshold = string;
+export type TimeAmount = `${number} ${IntervalTimeUnit}`;
+export type MonitorInterval = TimeAmount;
+export type ResponseTimeThreshold = TimeAmount;
 export type ContentMatchPattern = string;
 export type ElmentMatchPattern = string;
 
