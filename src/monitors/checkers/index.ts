@@ -6,7 +6,7 @@ import response_time from './response_time'
 import content_match from './content_match'
 import element_match from './element_match'
 
-export type MonitorCheckerMap = { [key in keyof typeof MonitorType]: MonitorChecker<MonitorConfig<key>> }
+export type MonitorCheckerMap = { [key in MonitorType]: MonitorChecker<MonitorConfig<MonitorType>> }
 
 const map: MonitorCheckerMap = {
     ssl_validity,

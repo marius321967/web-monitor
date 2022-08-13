@@ -1,12 +1,21 @@
 import { MonitorConfig } from '../config/Config'
-import monitorCheckerRegistry, { MonitorCheckerMap } from './checkers'
+import buildCycleCallback, { CycleCallbackBuilder } from './buildCycleCallback'
+import initCycles, { CyclesInitiator } from './initCycles';
 import { MonitorStopper } from './MonitorStopper'
 
 export type MonitorStarter = (monitorConfig: MonitorConfig) => Promise<MonitorStopper>
 
 export const base =
-    (monitorCheckerRegistry: MonitorCheckerMap): MonitorStarter =>
-    (monitorConfig) => Promise.resolve(() => {});
+    (buildCycleCallback: CycleCallbackBuilder, initCycles: CyclesInitiator): MonitorStarter =>
+    /** Finds correct monitor checker & initiates monitoring */
+    (monitorConfig) => {
+        const callback = buildCycleCallback(monitorConfig);
 
-// todo
-export default base(monitorCheckerRegistry)
+        callback();
+
+        const monitorStopper = initCycles(callback, monitorConfig.interval);
+
+        return Promise.resolve(monitorStopper);
+    }
+
+export default base(buildCycleCallback, initCycles)
