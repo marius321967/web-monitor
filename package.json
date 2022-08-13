@@ -10,6 +10,7 @@
     "ts-mocha": "mocha -r ts-node/register -r tsconfig-paths/register",
     "test:types": "yarn tsc --noEmit",
     "test:unit": "yarn ts-mocha 'tests/unit/**/*.spec.ts'",
+    "test:integration": "yarn ts-mocha 'tests/integration/**/*.spec.ts'",
     "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'"
   },
   "devDependencies": {
