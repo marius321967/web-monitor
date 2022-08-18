@@ -67,7 +67,7 @@ const emptyPassAuth = { ...sampleEmailNotifier.auth, pass: '' };
 describe('config/validateStructure', () => {
   
   ['monitors', 'notify', 'email_notifier'].forEach(field => 
-    it(`Rejects missing field: ${field}`, 
+    it(`Catches missing field: ${field}`, 
       () => expect(validate(dissoc(field as keyof Config, sampleConfig))).toGiveError('MISSING', [field]))
   );
   
