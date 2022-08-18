@@ -1,5 +1,5 @@
 import { ConfigReader } from '@/config/readConfig'
-import { ConfigValidator } from '@/config/validateConfig'
+import { ConfigValidator } from '@/config/ConfigValidator'
 import { assert } from 'chai'
 import { left, right, fold } from 'fp-ts/Either'
 import { base } from '@/loadConfig'
