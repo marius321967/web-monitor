@@ -1,6 +1,6 @@
 import { Config, MonitorType, RequestMethod } from '@/config/Config'
 
-const sampleConfig: Config = ({
+const sampleConfig: Config = {
   monitors: {
     ssl: {
       label: 'SSL',
@@ -28,7 +28,14 @@ const sampleConfig: Config = ({
     }
   },
 
-  notify: {},
+  notify: {
+    admin: {
+      email: 'admin@example.com'
+    },
+    developer_1: {
+      email: 'johndoe@example.com'
+    }
+  },
 
   email_notifier: {
     host: 'smtp.mailtrap.io',
@@ -38,6 +45,6 @@ const sampleConfig: Config = ({
       pass: 'bar'
     },
   }
-})
+} as const;
 
 export default sampleConfig

@@ -5,7 +5,6 @@ const translations = {
   'number.base': 'NOT_NUMBER',
   'any.only': 'FORBIDDEN_VALUE',
   'any.required': 'MISSING',
-  'object.unknown': 'INVALID_MODEL',
   'string.empty': 'EMPTY',
   'array.empty': 'EMPTY',
   'boolean.base': 'NOT_BOOLEAN',
@@ -18,10 +17,13 @@ const translations = {
   'string.element-match.pattern': 'MALFORMED_SELECTOR',
   'string.http-method.base': 'UNKNOWN_METHOD',
   'string.time-amount.amount-not-positive': 'AMOUNT_NOT_POSITIVE',
+  'string.hostname': 'INVALID_HOSTNAME',
   'regexp.malformed': 'MALFORMED_REGEX',
   'number.precision': 'DECIMAL_PRECISION_TOO_HIGH',
   'number.min': 'NOT_NONNEGATIVE_NUMBER',
+  'number.port': 'INVALID_PORT',
   'monitor.request.base': 'NOT_OBJECT_OR_STRING',
+  
 };
 
 export default translations
