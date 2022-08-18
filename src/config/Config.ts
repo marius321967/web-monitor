@@ -18,7 +18,20 @@ export enum MonitorType {
     element_match = 'element_match',
 }
 
-export type IntervalTimeUnit = 'second' | 'seconds' | 'minute' | 'minutes' | 'hour' | 'hours' | 'day' | 'days' | 'week' | 'weeks';
+export enum IntervalTimeUnitEnum {
+    second = 'second',
+    seconds = 'seconds',
+    minute = 'minute',
+    minutes = 'minutes',
+    hour = 'hour',
+    hours = 'hours',
+    day = 'day',
+    days = 'days',
+    week = 'week',
+    weeks = 'weeks'
+}
+
+export type IntervalTimeUnit = keyof typeof IntervalTimeUnitEnum;
 export type TimeAmount = `${number} ${IntervalTimeUnit}`;
 export type MonitorInterval = TimeAmount;
 export type ResponseTimeThreshold = TimeAmount;
