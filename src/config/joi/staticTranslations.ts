@@ -23,7 +23,7 @@ const translations = {
   'number.min': 'NOT_NONNEGATIVE_NUMBER',
   'number.port': 'INVALID_PORT',
   'monitor.request.base': 'NOT_OBJECT_OR_STRING',
-  
+  'object.unknown': 'UNUSED',
 };
 
 export default translations
