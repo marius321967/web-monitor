@@ -71,6 +71,8 @@ describe('config/validateStructure', () => {
       () => expect(validate(dissoc(field as keyof Config, sampleConfig))).toGiveError('MISSING', [field]))
   );
   
+  it('Catches extra root-level field', () => expect(validate({ ...sampleConfig, foo: 'bar' })).toGiveError('UNUSED', ['foo']));
+  
   it('Catches non-object [monitor.*]', () => expect(validate([])).toGiveError('NOT_OBJECT'))
   it('Catches missing fields [monitor.*]', () => expect(validate(withMonitor(missingFieldMonitor))).toGiveError('MISSING', ['monitors', 'test', 'request']))
   it('Catches unknown fields [monitor.*]', () => expect(validate(withMonitor(extraFieldMonitor))).toGiveError('UNUSED', ['monitors', 'test', 'foo']))
