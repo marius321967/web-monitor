@@ -1,8 +1,7 @@
 import { Either, left, right, fold } from 'fp-ts/Either'
-import { fold as foldOpt } from 'fp-ts/Option'
 import { Config } from './config/Config'
 import { ConfigReader } from './config/readConfig'
-import { ConfigValidator } from './config/validateConfig'
+import { ConfigValidator } from './config/ConfigValidator'
 
 /**
  * Reads and validates configuration. 
