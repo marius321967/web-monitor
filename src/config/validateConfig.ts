@@ -1,9 +1,7 @@
-import { Config } from './Config'
-
-/** 
- * Checks if input matches the structure of Config
- * @see Config
- */
-export type ConfigValidator = (input: any) => Promise<Error | null>
+import { ConfigValidator } from './ConfigValidator'
+import { ConfigStructureValidator } from './validateStructure'
 
 // todo
+export const base = 
+  (validateStructure: ConfigStructureValidator, validateConnections: ConfigValidator): ConfigValidator =>
+  (input) => Promise.resolve(null);
