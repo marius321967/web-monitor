@@ -3,6 +3,7 @@ import { IntervalToMsConverter } from '@/monitors/IntervalToMs'
 import sinon, { SinonSpy } from 'sinon'
 import { base } from '@/monitors/initCycles'
 import { CycleCallback } from '@/monitors/buildCycleCallback'
+import { TimeAmount } from '@/config/Config'
 
 describe('monitors/initCycles', () => {
 
@@ -11,7 +12,7 @@ describe('monitors/initCycles', () => {
     clearInterval: IntervalClearer,
     intervalToMs: IntervalToMsConverter;
 
-  let callback: CycleCallback, interval = 'foo days';
+  let callback: CycleCallback, interval: TimeAmount = '2 days';
 
   beforeEach(() => {
     intervalBearer = Symbol() as unknown as NodeJS.Timer;
@@ -27,7 +28,7 @@ describe('monitors/initCycles', () => {
     () => {
       base(setInterval, clearInterval, intervalToMs)(callback, interval);
 
-      sinon.assert.calledOnceWithExactly(intervalToMs as SinonSpy, 'foo days');
+      sinon.assert.calledOnceWithExactly(intervalToMs as SinonSpy, '2 days');
     }
   )
 
