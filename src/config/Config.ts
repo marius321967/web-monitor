@@ -78,7 +78,7 @@ export type MonitorConfig<T = MonitorType> = {
 export type MonitorMap = { [key: string]: MonitorConfig }
 
 export type Recipient = {
-    email?: string
+    email: string
 }
 
 export type RecipientMap = { [key: string]: Recipient }
