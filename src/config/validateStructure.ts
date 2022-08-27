@@ -12,7 +12,6 @@ import emailNotifierSchema from './structure/emailNotifierSchema'
  */
 export type ConfigStructureValidator = (input: any) => ConfigError | null;
 
-
 const rules = joi.object<Config>({
   monitors: monitorsSchema,
   notify: notifySchema,
@@ -26,6 +25,5 @@ const validateStructure: ConfigStructureValidator = (input) => {
     ? toConfigError(result.error)
     : null;
 };
-  
 
 export default validateStructure;
