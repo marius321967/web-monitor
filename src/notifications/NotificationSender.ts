@@ -1,3 +1,4 @@
 import { MonitorConfig } from '../config/Config'
 
-export type NotificationSender = (config: MonitorConfig, meta: Object) => Promise<void>
+// todo refactor
+export type NotificationSender = (config: MonitorConfig) => Promise<void>

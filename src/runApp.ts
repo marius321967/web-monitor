@@ -8,8 +8,8 @@ export type AppRunner = () => Promise<void>;
 
 // todo
 export const base = 
-    (loadConfig: ConfigLoader, startMonitors: MonitorsStarter, handleConfigFailure: ConfigFailureHandler): AppRunner => 
-    () => Promise.resolve()
-    // =>  loadConfig().then(startOrFail(startMonitors, handleConfigFailure));
+  (loadConfig: ConfigLoader, startMonitors: MonitorsStarter, handleConfigFailure: ConfigFailureHandler): AppRunner => 
+  () => Promise.resolve()
+  // =>  loadConfig().then(startOrFail(startMonitors, handleConfigFailure));
 
 export default base(loadConfig, startMonitors, handleConfigFailure)
