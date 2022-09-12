@@ -7,6 +7,7 @@ import { ErrorRegistration } from '@/notifications/registerError'
 
 describe('monitors/buildCycleCallback', () => {
   
+  const monitorId = 'foo';
   const sampleError = new Error('FOO_ERR');
 
   const monitorCheckerMap: MonitorCheckerMap = {
@@ -15,12 +16,12 @@ describe('monitors/buildCycleCallback', () => {
     [MonitorType.element_match]: sinon.fake.resolves(null),
     [MonitorType.response_code]: sinon.fake.resolves(null),
     [MonitorType.response_time]: sinon.fake.resolves(sampleError),
-  }
-  const registerError: ErrorRegistration = sinon.fake.resolves(undefined);
+  };
 
-  const monitorId = 'foo';
+  let registerError: ErrorRegistration;
   
   beforeEach(() => {
+    registerError = sinon.fake.resolves(undefined);
   })
 
   it(
@@ -49,7 +50,7 @@ describe('monitors/buildCycleCallback', () => {
   it('Callback error register not called when no error', () => 
     base(monitorCheckerMap, registerError)(monitorId, sampleConfig.monitors.ssl)()
       .then(() => {
-        sinon.assert.notCalled(reportError);
+        sinon.assert.notCalled(registerError as SinonSpy);
       })
   )
 
