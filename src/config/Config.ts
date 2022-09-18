@@ -75,6 +75,11 @@ export type MonitorConfig<T = MonitorType> = {
     request: MonitorRequestConfig
 } & MonitorSpecificConfig;
 
+export type UniqueMonitorConfig<T = MonitorType> = { 
+    id: string,
+    payload: MonitorConfig<T>
+}
+
 export type MonitorMap = { [key: string]: MonitorConfig }
 
 export type Recipient = {

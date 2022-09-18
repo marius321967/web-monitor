@@ -5,6 +5,7 @@ import { MonitorStopper } from '@/monitors/MonitorStopper'
 import sinon, { SinonSpy } from 'sinon'
 import sampleConfig from '../sampleConfig'
 import { assert } from 'chai'
+import { UniqueMonitorConfig } from '@/config/Config'
 
 describe('monitors/startMonitor', () => {
 
@@ -13,7 +14,10 @@ describe('monitors/startMonitor', () => {
     initCycles: CyclesInitiator;
 
   const stopper: MonitorStopper = () => {};
-  const monitorConfig = sampleConfig.monitors.ssl;
+  const uniqueConfig: UniqueMonitorConfig = {
+    id: 'foo',
+    payload: sampleConfig.monitors.ssl
+  };
 
   beforeEach(() => {
     cycleCallback = sinon.fake();
@@ -23,25 +27,25 @@ describe('monitors/startMonitor', () => {
 
   it(
     'Uses buildCycleCallback()', 
-    () => base(buildCycleCallback, initCycles)(monitorConfig)
-      .then(() => sinon.assert.calledOnceWithExactly(buildCycleCallback as SinonSpy, monitorConfig))
+    () => base(buildCycleCallback, initCycles)(uniqueConfig)
+      .then(() => sinon.assert.calledOnceWithExactly(buildCycleCallback as SinonSpy, uniqueConfig))
   )
 
   it(
     'Uses initCycles()',
-    () => base(buildCycleCallback, initCycles)(monitorConfig)
+    () => base(buildCycleCallback, initCycles)(uniqueConfig)
       .then(() => sinon.assert.calledOnceWithExactly(initCycles as SinonSpy, cycleCallback, '3 days'))
   )
 
   it(
     'Returns monitor stopper callback', 
-    () => base(buildCycleCallback, initCycles)(monitorConfig)
+    () => base(buildCycleCallback, initCycles)(uniqueConfig)
       .then(result => assert.equal(result, stopper))
   )
 
   it(
     'Immediately calls first cycle',
-    () => base(buildCycleCallback, initCycles)(monitorConfig)
+    () => base(buildCycleCallback, initCycles)(uniqueConfig)
       .then(() => sinon.assert.calledOnce(cycleCallback as SinonSpy))
   )
 

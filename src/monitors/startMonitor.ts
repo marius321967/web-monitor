@@ -1,19 +1,19 @@
-import { MonitorConfig } from '../config/Config'
+import { UniqueMonitorConfig } from '../config/Config'
 import buildCycleCallback, { CycleCallbackBuilder } from './buildCycleCallback'
-import initCycles, { CyclesInitiator } from './initCycles';
+import initCycles, { CyclesInitiator } from './initCycles'
 import { MonitorStopper } from './MonitorStopper'
 
-export type MonitorStarter = (monitorConfig: MonitorConfig) => Promise<MonitorStopper>
+export type MonitorStarter = (uniqueConfig: UniqueMonitorConfig) => Promise<MonitorStopper>
 
 export const base =
     (buildCycleCallback: CycleCallbackBuilder, initCycles: CyclesInitiator): MonitorStarter =>
     /** Finds correct monitor checker & initiates monitoring */
-    (monitorConfig) => {
-        const callback = buildCycleCallback(monitorConfig);
+    (uniqueConfig) => {
+        const callback = buildCycleCallback(uniqueConfig);
 
         callback();
 
-        const monitorStopper = initCycles(callback, monitorConfig.interval);
+        const monitorStopper = initCycles(callback, uniqueConfig.payload.interval);
 
         return Promise.resolve(monitorStopper);
     }

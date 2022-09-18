@@ -1,9 +1,9 @@
-import { MonitorConfig } from '@/config/Config'
+import { UniqueMonitorConfig } from '@/config/Config'
 import monitorCheckerRegistry, { MonitorCheckerMap } from './checkers'
 import { ErrorRegistration } from '../notifications/registerError'
 
 export type CycleCallback = () => Promise<void>
-export type CycleCallbackBuilder = (monitorId: string, config: MonitorConfig) => CycleCallback;
+export type CycleCallbackBuilder = (uniqueConfig: UniqueMonitorConfig) => CycleCallback;
 
 const registerErrorIfPresent = 
   (registerError: ErrorRegistration, monitorId: string) => 
@@ -15,8 +15,8 @@ const registerErrorIfPresent =
 // todo: notify errors
 export const base =
   (monitorCheckerRegistry: MonitorCheckerMap, registerError: ErrorRegistration): CycleCallbackBuilder =>
-  (monitorId, config) => 
+  (uniqueConfig) => 
     () => monitorCheckerRegistry[config.type](config)
-      .then(registerErrorIfPresent(registerError, monitorId));
+      .then(registerErrorIfPresent(registerError, uniqueConfig.id));
 
 // export default base(monitorCheckerRegistry)

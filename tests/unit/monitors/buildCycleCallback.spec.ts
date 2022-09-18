@@ -2,12 +2,13 @@ import { base } from '@/monitors/buildCycleCallback'
 import sinon, { SinonSpy } from 'sinon'
 import sampleConfig from '../sampleConfig'
 import { MonitorCheckerMap } from '@/monitors/checkers'
-import { MonitorType } from '@/config/Config'
+import { MonitorConfig, MonitorType, UniqueMonitorConfig } from '@/config/Config'
 import { ErrorRegistration } from '@/notifications/registerError'
 
 describe('monitors/buildCycleCallback', () => {
   
-  const monitorId = 'foo';
+  const withPayload = (payload: MonitorConfig): UniqueMonitorConfig => ({ id: 'foo', payload });
+  
   const sampleError = new Error('FOO_ERR');
 
   const monitorCheckerMap: MonitorCheckerMap = {
@@ -27,7 +28,7 @@ describe('monitors/buildCycleCallback', () => {
   it(
     'Callback uses the appropriate checker',
     () => {
-      const callback = base(monitorCheckerMap, registerError)(monitorId, sampleConfig.monitors.ssl);
+      const callback = base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.ssl));
       
       return callback()
         .then(() => {
@@ -41,14 +42,14 @@ describe('monitors/buildCycleCallback', () => {
   )
 
   it('Callback registers errors', () => 
-    base(monitorCheckerMap, registerError)(monitorId, sampleConfig.monitors.response_time)()
+    base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.response_time))()
       .then(() => {
         sinon.assert.calledOnceWithExactly(registerError as SinonSpy, 'foo', sampleError);
       })
   )
 
   it('Callback error register not called when no error', () => 
-    base(monitorCheckerMap, registerError)(monitorId, sampleConfig.monitors.ssl)()
+    base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.ssl))()
       .then(() => {
         sinon.assert.notCalled(registerError as SinonSpy);
       })

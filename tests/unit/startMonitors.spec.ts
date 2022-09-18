@@ -7,7 +7,8 @@ import { MonitorStopper } from '@/monitors/MonitorStopper'
 
 describe('startMonitors', () => {
   
-  let startMonitor: MonitorStarter, config = sampleConfig;
+  let startMonitor: MonitorStarter;
+  const sampleMonitors = sampleConfig.monitors;
   const stoppers = [ Symbol(), Symbol(), Symbol() ];
   
   beforeEach(() => {
@@ -17,20 +18,19 @@ describe('startMonitors', () => {
   
   it(
     'Uses startMonitor()', 
-    () => base(startMonitor)(config)
+    () => base(startMonitor)(sampleConfig)
       .then(() => {
         sinon.assert.calledThrice(startMonitor as SinonSpy);
         
-        Object.entries(config.monitors).forEach(
-          ([ _, monitorConfig ], index) => 
-          assert.deepEqual((startMonitor as SinonSpy).getCall(index).args[0], monitorConfig)
-        );
+        assert.deepEqual((startMonitor as SinonSpy).getCall(0).args[0], { id: 'ssl', payload: sampleMonitors.ssl });
+        assert.deepEqual((startMonitor as SinonSpy).getCall(1).args[0], { id: 'contact_form', payload: sampleMonitors.contact_form });
+        assert.deepEqual((startMonitor as SinonSpy).getCall(2).args[0], { id: 'response_time', payload: sampleMonitors.response_time });
       })
   )
         
   it(
     'Returns list of MonitorStopper', 
-    () => base(startMonitor)(config)
+    () => base(startMonitor)(sampleConfig)
       .then(result => assert.deepEqual(result, stoppers as unknown as MonitorStopper[]))
   )
   
