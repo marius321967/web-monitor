@@ -5,6 +5,10 @@ import registerError, { ErrorRegistration } from '../notifications/registerError
 export type CycleCallback = () => Promise<void>
 export type CycleCallbackBuilder = (uniqueConfig: UniqueMonitorConfig) => CycleCallback;
 
+const callChecker = 
+  (registry: MonitorCheckerMap, uniqueConfig: UniqueMonitorConfig) => 
+    registry[uniqueConfig.payload.type](uniqueConfig.payload);
+
 const registerErrorIfPresent = 
   (registerError: ErrorRegistration, monitorId: string) => 
   (result: Error | null): Promise<void> => 
@@ -15,7 +19,7 @@ const registerErrorIfPresent =
 export const base =
   (monitorCheckerRegistry: MonitorCheckerMap, registerError: ErrorRegistration): CycleCallbackBuilder =>
   (uniqueConfig) => 
-    () => monitorCheckerRegistry[config.type](config)
+    () => callChecker(monitorCheckerRegistry, uniqueConfig)
       .then(registerErrorIfPresent(registerError, uniqueConfig.id));
 
 export default base(monitorCheckerRegistry, registerError)
