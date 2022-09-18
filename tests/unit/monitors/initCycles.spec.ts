@@ -20,7 +20,7 @@ describe('monitors/initCycles', () => {
     clearInterval = sinon.fake();
     intervalToMs = sinon.fake.returns(123456);
 
-    callback = () => {};
+    callback = () => Promise.resolve();
   })
 
   it(
