@@ -13,7 +13,7 @@ export const base =
   (uniqueMonitorConfig, error) => pipe(
     getRecipients(),
     values,
-    map(recipient => sendNotification(recipient, uniqueMonitorConfig, error)),
+    map(recipient => sendNotification(recipient, { uniqueMonitorConfig, error })),
     jobs => Promise.all(jobs).then(() => undefined),
   )
 
