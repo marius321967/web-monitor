@@ -8,7 +8,6 @@ import sendNotification, { NotificationSender } from './sendNotification'
 /** Sends error notifications to registred recipients */
 export type NotificationsSender = (uniqueMonitorConfig: UniqueMonitorConfig, error: Error) => Promise<void>
 
-// todo
 export const base = 
   (getRecipients: RecipientsGetter, sendNotification: NotificationSender): NotificationsSender =>
   (uniqueMonitorConfig, error) => pipe(
