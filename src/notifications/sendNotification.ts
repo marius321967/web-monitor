@@ -1,10 +1,13 @@
 import { Recipient, UniqueMonitorConfig } from '../config/Config'
+import { NotificationAgentMap } from './agents'
+import notificationAgentSender from './agents'
 
-export type NotificationSender = (recipient: Recipient, uniqueMonitorConfig: UniqueMonitorConfig, error: Error) => Promise<void>
+export type NotificationSender = (recipient: Recipient, context: NotificationContext) => Promise<void>
 
-// todo
+export type NotificationContext = { uniqueMonitorConfig: UniqueMonitorConfig, error: Error };
+
 export const base = 
-  (): NotificationSender =>
-  () => Promise.resolve()
+  (agentMap: NotificationAgentMap): NotificationSender =>
+  (recipient, context) => agentMap.email(recipient.email, context);
 
-export default base()
+export default base(notificationAgentSender)
