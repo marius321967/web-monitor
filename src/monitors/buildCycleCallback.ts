@@ -10,16 +10,16 @@ const callChecker =
     registry[uniqueConfig.payload.type](uniqueConfig.payload);
 
 const registerErrorIfPresent = 
-  (registerError: ErrorRegistration, monitorId: string) => 
+  (registerError: ErrorRegistration, uniqueConfig: UniqueMonitorConfig) => 
   (result: Error | null): Promise<void> => 
     (result !== null)
-      ? registerError(monitorId, result)
+      ? registerError(uniqueConfig, result)
       : Promise.resolve();
 
 export const base =
   (monitorCheckerRegistry: MonitorCheckerMap, registerError: ErrorRegistration): CycleCallbackBuilder =>
   (uniqueConfig) => 
     () => callChecker(monitorCheckerRegistry, uniqueConfig)
-      .then(registerErrorIfPresent(registerError, uniqueConfig.id));
+      .then(registerErrorIfPresent(registerError, uniqueConfig));
 
 export default base(monitorCheckerRegistry, registerError)
