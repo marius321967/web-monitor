@@ -1,9 +1,11 @@
 import { UniqueMonitorConfig } from '@/config/Config'
 import { RecipientsGetter } from '@/config/container'
-import { NotificationSender } from '@/notifications/sendNotification'
+import { NotificationContext, NotificationSender } from '@/notifications/sendNotification'
 import sinon, { SinonSpy } from 'sinon'
 import sampleConfig from '../sampleConfig'
 import { base } from '@/notifications/sendNotifications'
+
+const context = (uniqueMonitorConfig: UniqueMonitorConfig, error: Error): NotificationContext => ({ uniqueMonitorConfig, error });
 
 describe('notifications/sendNotifications', () => {
 
@@ -29,8 +31,8 @@ describe('notifications/sendNotifications', () => {
     base(getRecipients, sendNotification)(uniqueMonitorConfig, error)
       .then(() => {
         sinon.assert.calledTwice(sendNotification as SinonSpy);
-        sinon.assert.calledWithExactly(sendNotification as SinonSpy, recipients.admin, uniqueMonitorConfig, error);
-        sinon.assert.calledWithExactly(sendNotification as SinonSpy, recipients.developer_1, uniqueMonitorConfig, error);
+        sinon.assert.calledWithExactly(sendNotification as SinonSpy, recipients.admin, context(uniqueMonitorConfig, error));
+        sinon.assert.calledWithExactly(sendNotification as SinonSpy, recipients.developer_1, context(uniqueMonitorConfig, error));
       })
   )
 
