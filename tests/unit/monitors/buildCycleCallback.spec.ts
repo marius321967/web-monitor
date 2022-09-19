@@ -41,12 +41,15 @@ describe('monitors/buildCycleCallback', () => {
     }
   )
 
-  it('Callback registers errors', () => 
-    base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.response_time))()
+  it('Callback registers errors', () => {
+    const uniqueMonitorConfig = withPayload(sampleConfig.monitors.response_time);
+
+    base(monitorCheckerMap, registerError)(uniqueMonitorConfig)()
       .then(() => {
-        sinon.assert.calledOnceWithExactly(registerError as SinonSpy, 'foo', sampleError);
-      })
-  )
+        sinon.assert.calledOnceWithExactly(registerError as SinonSpy, uniqueMonitorConfig, sampleError);
+      });
+
+  })
 
   it('Callback error register not called when no error', () => 
     base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.ssl))()
