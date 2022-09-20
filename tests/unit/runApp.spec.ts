@@ -41,4 +41,6 @@ describe('runApp', () => {
       })
   )
 
+  it('Puts config in container')
+
 })
