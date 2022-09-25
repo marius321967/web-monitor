@@ -1,10 +1,10 @@
 import shutdown, { AppShutdown } from '@/app/shutdown'
 import logger from '@/logger'
 
-export type ConfigFailureHandler = (error: Error) => void
+export type InvalidConfigHandler = (error: Error) => void
 
 export const base = 
-    (shutdown: AppShutdown): ConfigFailureHandler => 
+    (shutdown: AppShutdown): InvalidConfigHandler => 
     /** Reports & shuts down the application  */
     (error) => {
         logger.error({ message: error });

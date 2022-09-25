@@ -1,5 +1,5 @@
 import { ValidConfigHandler } from '@/app/handleValidConfig'
-import { ConfigFailureHandler } from '@/config/handleConfigFailure'
+import { InvalidConfigHandler } from '@/app/handleInvalidConfig'
 import { ConfigLoader } from '@/loadConfig'
 import { base } from '@/runApp'
 import { left, right } from 'fp-ts/lib/Either'
@@ -11,7 +11,7 @@ describe('runApp', () => {
   let loadConfigSuccess: ConfigLoader, 
     loadConfigError: ConfigLoader,
     handleValidConfig: ValidConfigHandler, 
-    handleInvalidConfig: ConfigFailureHandler;
+    handleInvalidConfig: InvalidConfigHandler;
 
   const configError = new Error('FOO_ERR');
 

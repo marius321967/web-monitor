@@ -1,10 +1,10 @@
 import { AppShutdown } from '@/app/shutdown'
-import { base } from '@/config/handleConfigFailure'
+import { base } from '@/app/handleInvalidConfig'
 import logger from '@/logger'
 import { assert } from 'chai'
 import sinon, { SinonSpy } from 'sinon'
 
-describe('config/handleConfigFailure', () => {
+describe('app/handleInvalidConfig', () => {
 
   let errorSpy: SinonSpy, infoSpy: SinonSpy, shutdown: AppShutdown;
   const error = new Error('FOO_ERR');
