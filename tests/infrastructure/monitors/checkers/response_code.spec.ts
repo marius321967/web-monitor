@@ -2,7 +2,7 @@ import check from '@/monitors/checkers/response_code'
 import { MonitorType } from '@/config/Config'
 import { assert } from 'chai'
 
-describe('monitors/handlers/response_code', function() {
+describe('monitors/checkers/response_code', function() {
 
     this.timeout(10_000);
 
