@@ -45,7 +45,7 @@ describe('monitors/requests/sendAxiosRequest', () => {
   Object.values(RequestMethod).forEach(method => 
     it(
       `Sends ${method} request`, 
-      () => base(axios)(request)
+      () => base(axios)({ ...request, method })
         .then(() => {
           sinon.assert.calledOnce(axios.request as SinonSpy);
 
