@@ -2,7 +2,7 @@ import { ContentMatchMonitor } from '@/config/Config'
 import { AxiosResponse } from 'axios'
 import { pipe } from 'fp-ts/lib/function'
 import { isString } from 'fp-ts/lib/string'
-import sendAxiosRequest, { AxiosSender } from 'tests/unit/monitors/requests/sendAxiosRequest'
+import sendAxiosRequest, { AxiosSender } from '@/monitors/requests/sendAxiosRequest'
 import { MonitorChecker } from './MonitorChecker'
 
 const contentType = (response: AxiosResponse): string => (response.headers['content-type'])

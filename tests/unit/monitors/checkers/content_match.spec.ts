@@ -2,7 +2,7 @@ import { ContentMatchMonitor, MonitorType } from '@/config/Config'
 import { base } from '@/monitors/checkers/content_match'
 import { assert } from 'chai'
 import sinon, { SinonSpy } from 'sinon'
-import { AxiosSender } from '../requests/sendAxiosRequest'
+import { AxiosSender } from '@/monitors/requests/sendAxiosRequest'
 import { responseWithData } from './sampleResponse'
 
 describe('monitors/checkers/content_match', () => {
