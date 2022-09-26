@@ -1,5 +1,5 @@
 import { MonitorConfig, MonitorType } from '@/config/Config'
-import axios, { AxiosStatic, AxiosResponse, AxiosError } from 'axios'
+import axios, { Axios, AxiosResponse, AxiosError } from 'axios'
 import { MonitorChecker } from './MonitorChecker'
 import { always, cond, equals } from 'ramda'
 import { flow } from 'fp-ts/lib/function'
@@ -25,7 +25,7 @@ const handleError = (expected: number) => cond([
 ]);
 
 export const base = 
-    (axios: AxiosStatic): MonitorChecker<MonitorConfig & { type: MonitorType.response_code }> =>
+    (axios: Axios): MonitorChecker<MonitorConfig & { type: MonitorType.response_code }> =>
     (monitor) => axios.get(monitor.request as string)
         .then(handleSuccess(monitor.expected_code))
         .catch(handleError(monitor.expected_code))
