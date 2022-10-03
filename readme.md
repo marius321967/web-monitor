@@ -1,7 +1,7 @@
 Docker-based microservice monitors configured metrics and notifies administrators when they fail.
 
 - metrics:
-    - SSL validity
+    - SSL validity (revocation & pubkey pinning not checked)
     - response code
     - response time
     - response content match (Regex)

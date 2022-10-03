@@ -97,6 +97,7 @@ describe('config/validateStructure', () => {
   // it('Catches non-integer amount [monitor.*.threshold]')
   it('Catches malformed regex [monitor.*.pattern] (type=content_match)', () => expect(validate(withMonitor(malformedContentMatchMonitor))).toGiveError('MALFORMED_REGEX', ['monitors', 'test', 'pattern']))
   it('Catches malformed selector [monitor.*.pattern] (type=element_match)', () => expect(validate(withMonitor(malformedSelectorMonitor))).toGiveError('MALFORMED_SELECTOR', ['monitors', 'test', 'pattern']))
+  it('Catches non-HTTPS URL [monitor.*.request] (type=ssl_validity)')
   
   it('Catches non-object [notify]', () => expect(validate(nonObjectNotifier)).toGiveError('NOT_OBJECT', ['notify']))
   it('Catches missing fields [notify.*]', () => expect(validate(withNotification(missingFieldNotification))).toGiveError('MISSING', ['notify', 'joe', 'email']))
