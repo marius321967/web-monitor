@@ -4,6 +4,10 @@ import { Either } from 'fp-ts/lib/Either'
 import { isString } from 'fp-ts/lib/string'
 import { always, cond } from 'ramda'
 
+/**
+ * Resolves even if response code gives error.
+ * Rejects if no response.
+ */
 export type AxiosSender = (request: MonitorRequestConfig) => Promise<AxiosResponse>
 
 /** Error-code responses are returned as responses, not errors */
