@@ -26,6 +26,10 @@ jobs:
       uses: borales/actions-yarn@v3.0.0
       with:
         cmd: test:unit
+    - name: Integration tests
+      uses: borales/actions-yarn@v3.0.0
+      with:
+        cmd: test:integration
     - name: Infrastructure tests
       run: >
         docker-compose \
