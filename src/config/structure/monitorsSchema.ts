@@ -1,6 +1,7 @@
 import joi, { CustomHelpers } from 'joi'
 import { IntervalTimeUnitEnum, MonitorConfig, MonitorMap, MonitorRequestConfigComplex, MonitorType, RequestMethod } from '../Config'
 import { amount } from '../timeAmount'
+import { load as cheerioLoad } from 'cheerio'
 
 const timeUnitList = Object.values(IntervalTimeUnitEnum);
 
@@ -38,10 +39,16 @@ const validateRegex = (input: string, helper: CustomHelpers) => {
   }
 };
 
-// todo
-const elementPatternSchema = joi.custom((input: string, helper) => (input == 'foo')
-  ? input
-  : helper.error('string.element-match.pattern'));
+const elementPatternSchema = joi.custom((input: string, helper) => {
+  const $ = cheerioLoad('<html></html>');
+
+  try {
+    $(input);
+    return input;
+  } catch (err) {
+    return helper.error('string.element-match.pattern');
+  }
+});
 
 const monitorSchema = joi.object<MonitorConfig>({
   label: joi.string()
