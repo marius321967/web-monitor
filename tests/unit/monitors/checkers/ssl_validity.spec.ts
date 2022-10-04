@@ -64,6 +64,4 @@ describe('monitors/checkers/ssl_validity', () => {
       })
   )
 
-  it('Reports response-less errors')
-
 })
