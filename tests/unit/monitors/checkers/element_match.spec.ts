@@ -31,16 +31,17 @@ describe('monitors/checkers/element_match', () => {
 
   it('Sends request', () => 
     base(sendAxiosRequest, selectorMatchesTrue)(monitor)
-    .then(() => {
-      sinon.assert.calledOnceWithExactly(sendAxiosRequest as SinonSpy, 'http://foo.com');
-    })
+      .then(() => {
+        sinon.assert.calledOnceWithExactly(sendAxiosRequest as SinonSpy, 'http://foo.com');
+      })
   )
 
   it('Searches for element', () => 
     base(sendAxiosRequest, selectorMatchesTrue)(monitor)
       .then(() => {
         sinon.assert.calledOnceWithExactly(selectorMatchesTrue as SinonSpy, 'body > .foo', 'some HTML');
-      }))
+      })
+  )
 
   it('Ignores when match succeeds', () => 
     base(sendAxiosRequest, selectorMatchesTrue)(monitor)
@@ -53,7 +54,6 @@ describe('monitors/checkers/element_match', () => {
     base(sendAxiosRequest, selectorMatchesFalse)(monitor)
       .then(result => {
         assert.isNotNull(result);
-        console.log(result);
         
         assert.include((result as Error).message, 'Could not find HTML element');
       })
