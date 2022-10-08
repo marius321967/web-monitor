@@ -19,5 +19,3 @@ export type RecurringErrorChecker = (monitorId: string, err: Error) => boolean;
 export const isRecurringError: RecurringErrorChecker = (monitorId, err) => (states[monitorId] === true || states[monitorId] === undefined)
   ? false
   : compareErrors(states[monitorId] as Error, err);
-
-// todo: use registerSuccess and registerError
