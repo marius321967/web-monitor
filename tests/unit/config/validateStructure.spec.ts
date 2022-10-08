@@ -46,7 +46,9 @@ const unknownMethodRequest = { ...(sampleMonitor.request as MonitorRequestConfig
 const emptyAuthHeaderRequest = { ...(sampleMonitor.request as MonitorRequestConfigComplex), auth_header: '' };
 const nonNumberCodeMonitor = { ...sampleMonitor, type: MonitorType.response_time, expected_code: '200' };
 const negativeThresholdMonitor = { ...sampleMonitor, type: MonitorType.response_time, threshold: '-2 days' };
-const malformedContentMatchMonitor = { ...sampleMonitor, type: MonitorType.content_match, pattern: '/(/' };
+const basicContentMatchMonitor = { ...sampleMonitor, type: MonitorType.content_match, pattern: '/(' }; // no trailing slash - not regex
+const emptyContentMatchMonitor = { ...sampleMonitor, type: MonitorType.content_match, pattern: '' };
+const malformedRegexContentMatchMonitor = { ...sampleMonitor, type: MonitorType.content_match, pattern: '/(/' };
 const malformedSelectorMonitor = { ...sampleMonitor, type: MonitorType.element_match, pattern: '.some-class[' };
 const validSelectorMonitor = { ...sampleMonitor, type: MonitorType.element_match, pattern: 'html > body .some-class:first-child:not(:hover)' };
 
@@ -98,8 +100,10 @@ describe('config/validateStructure', () => {
   // it('Catches amount=0 [monitor.*.threshold]')
   // it('Catches unknown time unit [monitor.*.threshold]')
   // it('Catches non-integer amount [monitor.*.threshold]')
-  // todo: fix to surround regex with slashes
-  it('Catches malformed regex [monitor.*.pattern] (type=content_match)', () => expect(validate(withMonitor(malformedContentMatchMonitor))).toGiveError('MALFORMED_REGEX', ['monitors', 'test', 'pattern']))
+
+  it('Catches empty [monitor.*.pattern] (type=content_match)', () => expect(validate(withMonitor(emptyContentMatchMonitor))).toGiveError('EMPTY', ['monitors', 'test', 'pattern']))
+  it('Passes non-regex [monitor.*.pattern] (type=content_match)', () => expect(validate(withMonitor(basicContentMatchMonitor))).toPass())
+  it('Catches malformed regex [monitor.*.pattern] (type=content_match)', () => expect(validate(withMonitor(malformedRegexContentMatchMonitor))).toGiveError('MALFORMED_REGEX', ['monitors', 'test', 'pattern']))
   it('Catches malformed selector [monitor.*.pattern] (type=element_match)', () => expect(validate(withMonitor(malformedSelectorMonitor))).toGiveError('MALFORMED_SELECTOR', ['monitors', 'test', 'pattern']))
   it('Passes valid selector [monitor.*.pattern] (type=element_match)', () => expect(validate(withMonitor(validSelectorMonitor))).toPass())
   it('Catches non-HTTPS URL [monitor.*.request] (type=ssl_validity)')
