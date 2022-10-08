@@ -1,10 +1,12 @@
+import { Config } from './Config';
 import { ConfigValidator } from './ConfigValidator'
+import validateEmailConnection, { EmailConnectionValidator } from './validateEmailConnection'
 
 export type ConfigConnectionsValidator = ConfigValidator;
 
-// todo
 export const base = 
-  (): ConfigConnectionsValidator =>
-  () => Promise.resolve(null);
+  (validateEmailConnection: EmailConnectionValidator): ConfigConnectionsValidator =>
+  (config: Config) => 
+    validateEmailConnection(config.email_notifier);
 
-export default base()
+export default base(validateEmailConnection)
