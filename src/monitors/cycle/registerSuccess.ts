@@ -2,6 +2,12 @@ import { MonitorType, UniqueMonitorConfig } from '@/config/Config'
 import { registerSuccess } from '../statusRegistry'
 
 /** Handles cycle success */
-export type CycleSuccessRegistrator = <T = MonitorType>(uniqueConfig: UniqueMonitorConfig<T>) => Promise<void>
+export type CycleSuccessRegistrator = <T extends MonitorType>(uniqueConfig: UniqueMonitorConfig<T>) => Promise<void>
 
-export default (uniqueConfig) => registerSuccess(uniqueConfig.id)
+const fn: CycleSuccessRegistrator = (uniqueConfig) => {
+  registerSuccess(uniqueConfig.id);
+
+  return Promise.resolve();
+};
+
+export default fn
