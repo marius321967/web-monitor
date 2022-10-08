@@ -1,6 +1,6 @@
 import { UniqueMonitorConfig } from '@/config/Config'
 import monitorCheckerRegistry, { MonitorCheckerMap } from './checkers'
-import registerError, { ErrorRegistration } from '../notifications/registerError'
+import { CycleResultRegistrator } from './cycle/registerResult'
 
 export type CycleCallback = () => Promise<void>
 export type CycleCallbackBuilder = (uniqueConfig: UniqueMonitorConfig) => CycleCallback;
@@ -9,17 +9,10 @@ const callChecker =
   (registry: MonitorCheckerMap, uniqueConfig: UniqueMonitorConfig) => 
     registry[uniqueConfig.payload.type](uniqueConfig.payload);
 
-const registerErrorIfPresent = 
-  (registerError: ErrorRegistration, uniqueConfig: UniqueMonitorConfig) => 
-  (result: Error | null): Promise<void> => 
-    (result !== null)
-      ? registerError(uniqueConfig, result)
-      : Promise.resolve();
-
 export const base =
-  (monitorCheckerRegistry: MonitorCheckerMap, registerError: ErrorRegistration): CycleCallbackBuilder =>
+  (monitorCheckerRegistry: MonitorCheckerMap, registerResult: CycleResultRegistrator): CycleCallbackBuilder =>
   (uniqueConfig) => 
     () => callChecker(monitorCheckerRegistry, uniqueConfig)
-      .then(registerErrorIfPresent(registerError, uniqueConfig));
+      .then(result => registerResult(uniqueConfig, result));
 
-export default base(monitorCheckerRegistry, registerError)
+// export default base(monitorCheckerRegistry, registerResult)

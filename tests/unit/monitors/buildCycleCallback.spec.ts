@@ -3,7 +3,7 @@ import sinon, { SinonSpy } from 'sinon'
 import sampleConfig from '../sampleConfig'
 import { MonitorCheckerMap } from '@/monitors/checkers'
 import { MonitorConfig, MonitorType, UniqueMonitorConfig } from '@/config/Config'
-import { ErrorRegistration } from '@/notifications/registerError'
+import { CycleResultRegistrator } from '@/monitors/cycle/registerResult'
 
 describe('monitors/buildCycleCallback', () => {
   
@@ -19,16 +19,19 @@ describe('monitors/buildCycleCallback', () => {
     [MonitorType.response_time]: sinon.fake.resolves(sampleError),
   };
 
-  let registerError: ErrorRegistration;
+  const successfulMonitor = withPayload(sampleConfig.monitors.ssl);
+  const failingMonitor = withPayload(sampleConfig.monitors.response_time);
+
+  let registerResult: CycleResultRegistrator;
   
   beforeEach(() => {
-    registerError = sinon.fake.resolves(undefined);
+    registerResult = sinon.fake.resolves(undefined);
   })
 
   it(
     'Callback uses the appropriate checker',
     () => {
-      const callback = base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.ssl));
+      const callback = base(monitorCheckerMap, registerResult)(withPayload(sampleConfig.monitors.ssl));
       
       return callback()
         .then(() => {
@@ -41,20 +44,17 @@ describe('monitors/buildCycleCallback', () => {
     }
   )
 
-  it('Callback registers errors', () => {
-    const uniqueMonitorConfig = withPayload(sampleConfig.monitors.response_time);
-
-    base(monitorCheckerMap, registerError)(uniqueMonitorConfig)()
+  it('Callback registers result (success)', () => 
+    base(monitorCheckerMap, registerResult)(successfulMonitor)()
       .then(() => {
-        sinon.assert.calledOnceWithExactly(registerError as SinonSpy, uniqueMonitorConfig, sampleError);
-      });
+        sinon.assert.calledOnceWithExactly(registerResult as SinonSpy, successfulMonitor, null);
+      })
+  )
 
-  })
-
-  it('Callback error register not called when no error', () => 
-    base(monitorCheckerMap, registerError)(withPayload(sampleConfig.monitors.ssl))()
+  it('Callback registers result (failure)', () => 
+    base(monitorCheckerMap, registerResult)(failingMonitor)()
       .then(() => {
-        sinon.assert.notCalled(registerError as SinonSpy);
+        sinon.assert.calledOnceWithExactly(registerResult as SinonSpy, failingMonitor, sampleError);
       })
   )
 
