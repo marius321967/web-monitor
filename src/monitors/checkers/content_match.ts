@@ -4,6 +4,7 @@ import { pipe } from 'fp-ts/lib/function'
 import { isString } from 'fp-ts/lib/string'
 import sendAxiosRequest, { AxiosSender } from '@/monitors/requests/sendAxiosRequest'
 import { MonitorChecker } from './MonitorChecker'
+import buildRegex from './content_match/buildRegex'
 
 const contentType = (response: AxiosResponse): string => (response.headers['content-type'])
   ? response.headers['content-type']
@@ -15,11 +16,8 @@ const validateContentType = (response: AxiosResponse): Error | null => (isString
 
 const isRegex = (pattern: string): boolean => (pattern.startsWith('/') && pattern.endsWith('/'));
 
-/** Remove beginning & end slash from regex pattern */
-const delimitedRegex = (pattern: string): string => pattern.replace(/^\//, '').replace(/\/$/, '');
-
 const validateContentRegex = (pattern: string, data: string): Error | null => 
-  (new RegExp(delimitedRegex(pattern))).test(data)
+  buildRegex(pattern).test(data)
     ? null
     : new Error('Content could not be found');
 
