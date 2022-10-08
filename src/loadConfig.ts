@@ -1,7 +1,8 @@
 import { Either, left, right, fold } from 'fp-ts/Either'
 import { Config } from './config/Config'
-import { ConfigReader } from './config/readConfig'
+import readConfig, { ConfigReader } from './config/readConfig'
 import { ConfigValidator } from './config/ConfigValidator'
+import validateConfig from './config/validateConfig'
 
 /**
  * Reads and validates configuration. 
@@ -22,4 +23,4 @@ export const base = (read: ConfigReader, validate: ConfigValidator): ConfigLoade
       doValidate(validate)
     ))
 
-export default (() => {}) as ConfigLoader;
+export default base(readConfig, validateConfig)
