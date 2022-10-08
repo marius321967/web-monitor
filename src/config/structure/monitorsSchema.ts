@@ -30,9 +30,7 @@ const requestSchema = joi.alternatives(
 
 const validateRegex = (input: string, helper: CustomHelpers) => {
   try {
-    new RegExp(input);
-
-    return input;
+    return new RegExp(input);
   }
   catch (err) {
     return helper.error('regexp.malformed');
