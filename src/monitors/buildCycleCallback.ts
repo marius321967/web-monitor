@@ -1,6 +1,6 @@
 import { UniqueMonitorConfig } from '@/config/Config'
 import monitorCheckerRegistry, { MonitorCheckerMap } from './checkers'
-import { CycleResultRegistrator } from './cycle/registerResult'
+import registerResult, { CycleResultRegistrator } from './cycle/registerResult'
 
 export type CycleCallback = () => Promise<void>
 export type CycleCallbackBuilder = (uniqueConfig: UniqueMonitorConfig) => CycleCallback;
@@ -15,4 +15,4 @@ export const base =
     () => callChecker(monitorCheckerRegistry, uniqueConfig)
       .then(result => registerResult(uniqueConfig, result));
 
-// export default base(monitorCheckerRegistry, registerResult)
+export default base(monitorCheckerRegistry, registerResult)
