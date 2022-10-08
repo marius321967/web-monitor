@@ -2,7 +2,7 @@ import { MonitorType, UniqueMonitorConfig } from '@/config/Config'
 import registerFailure, { CycleFailureRegistrator } from './registerFailure'
 import registerSuccess, { CycleSuccessRegistrator } from './registerSuccess'
 
-export type CycleResultRegistrator = <T = MonitorType>(uniqueConfig: UniqueMonitorConfig<T>, result: Error | null) => Promise<void>
+export type CycleResultRegistrator = <T extends MonitorType>(uniqueConfig: UniqueMonitorConfig<T>, result: Error | null) => Promise<void>
 
 export const base = 
   (registerSuccess: CycleSuccessRegistrator, registerFailure: CycleFailureRegistrator): CycleResultRegistrator =>
