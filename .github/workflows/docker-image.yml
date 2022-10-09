@@ -31,6 +31,8 @@ jobs:
       with:
         cmd: test:integration
     - name: Infrastructure tests
+      env:
+        CONFIG: ${{ secrets.CONFIG }}
       run: >
         docker-compose \
           -f docker-compose.dev.yml up \
