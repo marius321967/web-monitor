@@ -1,3 +1,5 @@
 export type AppShutdown = () => void
 
-export default () => process.exit(1);
+const fn: AppShutdown = () => process.exit(1);
+
+export default fn

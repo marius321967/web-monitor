@@ -26,4 +26,4 @@ const validateStructure: ConfigStructureValidator = (input) => {
     : null;
 };
 
-export default validateStructure;
+export default validateStructure

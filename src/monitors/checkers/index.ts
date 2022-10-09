@@ -9,11 +9,11 @@ import element_match from './element_match'
 export type MonitorCheckerMap = { [key in MonitorType]: MonitorChecker<MonitorConfig<MonitorType>> }
 
 const map: MonitorCheckerMap = {
-    ssl_validity,
-    response_code,
-    response_time,
-    content_match,
-    element_match,
+  ssl_validity,
+  response_code,
+  response_time,
+  content_match,
+  element_match,
 }
 
 export default map

@@ -12,22 +12,22 @@ const throwUnexpectedCode = (response: AxiosResponse) => new Error(`Received an 
 const throwUnexpectedCodeFromError = flow(getResponse, throwUnexpectedCode);
 
 const handleSuccess = (expected: number) => cond([
-    [ isExpectedCode(expected), always(null) ],
-    [ always(true),             throwUnexpectedCode ]
+  [ isExpectedCode(expected), always(null) ],
+  [ always(true),             throwUnexpectedCode ]
 ]);
 
 const hasNoResponse = (error: Error | AxiosError): boolean => !('response' in error);
 
 const handleError = (expected: number) => cond([
-    [ hasNoResponse,                                (err) => err ],
-    [ flow(getResponse, isExpectedCode(expected)),  always(null) ],
-    [ always(true),                                 throwUnexpectedCodeFromError ]
+  [ hasNoResponse,                                (err) => err ],
+  [ flow(getResponse, isExpectedCode(expected)),  always(null) ],
+  [ always(true),                                 throwUnexpectedCodeFromError ]
 ]);
 
 export const base = 
-    (axios: Axios): MonitorChecker<MonitorConfig & { type: MonitorType.response_code }> =>
-    (monitor) => axios.get(monitor.request as string)
-        .then(handleSuccess(monitor.expected_code))
-        .catch(handleError(monitor.expected_code))
+  (axios: Axios): MonitorChecker<MonitorConfig & { type: MonitorType.response_code }> =>
+  (monitor) => axios.get(monitor.request as string)
+    .then(handleSuccess(monitor.expected_code))
+    .catch(handleError(monitor.expected_code))
 
 export default base(axios)

@@ -25,4 +25,4 @@ if (process.env.NODE_ENV != 'test')
 export default createLogger({
   level: 'info',
   transports: selectedTransports
-});
+})

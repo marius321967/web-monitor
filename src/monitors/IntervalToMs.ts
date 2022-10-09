@@ -9,4 +9,4 @@ const base = moment('1970-01-01T00:00:00.000');
 
 const intervalToMs: IntervalToMsConverter = (interval) => base.clone().add(amount(interval), unit(interval)).diff(base, 'milliseconds')
 
-export default intervalToMs;
+export default intervalToMs
