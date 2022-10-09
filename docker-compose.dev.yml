@@ -16,7 +16,7 @@ services:
     image: node:18
     working_dir: /app
     command: yarn test:infrastructure
-    env:
+    environment:
       - CONFIG
     volumes:
       - ./:/app
