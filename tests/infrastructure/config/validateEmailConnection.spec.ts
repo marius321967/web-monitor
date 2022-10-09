@@ -3,7 +3,6 @@ import readConfig from '@/config/readConfig'
 import validateEmailConnection from '@/config/validateEmailConnection'
 import { assert } from 'chai'
 import { isLeft } from 'fp-ts/lib/Either'
-import { clone } from 'ramda'
 
 describe('config/validateEmailConnection', function() {
   
