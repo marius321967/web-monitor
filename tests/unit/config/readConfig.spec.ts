@@ -1,5 +1,5 @@
 import { ConfigFileParser } from '@/config/parseYaml'
-import { ConfigFileReader } from '@/config/readFile'
+import { ConfigFilePuller } from '@/config/pullConfigFile'
 import { fold, left, right } from 'fp-ts/Either'
 import sinon, { SinonSpy } from 'sinon'
 import { base } from '@/config/readConfig'
@@ -7,11 +7,11 @@ import { assert } from 'chai'
 
 describe('config/readConfig', () => {
 
-  let readFile: ConfigFileReader, readFileWithError: ConfigFileReader, 
+  let pullConfigFile: ConfigFilePuller, readFileWithError: ConfigFilePuller, 
     parse: ConfigFileParser, parseWithError: ConfigFileParser;
 
   beforeEach(() => {
-    readFile =          sinon.fake.resolves(right('the file contents'));
+    pullConfigFile =          sinon.fake.resolves(right('the file contents'));
     readFileWithError = sinon.fake.resolves(left(new Error('FOO_ERR')));
 
     parse =           sinon.fake.resolves(right({ the: 'file contents' }));
@@ -19,19 +19,19 @@ describe('config/readConfig', () => {
   })
 
   it(
-    'Uses readFile()',
-    () => base(readFile, parse)()
-      .then(() => sinon.assert.calledOnce(readFile as SinonSpy))
+    'Uses pullConfigFile()',
+    () => base(pullConfigFile, parse)()
+      .then(() => sinon.assert.calledOnce(pullConfigFile as SinonSpy))
   )
 
   it(
     'Uses parse()',
-    () => base(readFile, parse)()
+    () => base(pullConfigFile, parse)()
       .then(() => sinon.assert.calledOnceWithExactly(parse as SinonSpy, 'the file contents'))
   )
 
   it(
-    'Returns error from readFile()',
+    'Returns error from pullConfigFile()',
     () => base(readFileWithError, parse)()
       .then(fold(
         (err) => {
@@ -44,7 +44,7 @@ describe('config/readConfig', () => {
 
   it(
     'Returns error from parse()',
-    () => base(readFile, parseWithError)()
+    () => base(pullConfigFile, parseWithError)()
       .then(fold(
         (err) => assert.equal(err.message, 'BAR_ERR'),
         () => assert.fail('Expected to return error')
@@ -53,7 +53,7 @@ describe('config/readConfig', () => {
 
   it(
     'Returns result from parse() when no error',
-    () => base(readFile, parse)()
+    () => base(pullConfigFile, parse)()
       .then(fold(
         err => assert.fail(err.message),
         contents => assert.deepEqual(contents, { the: 'file contents' })

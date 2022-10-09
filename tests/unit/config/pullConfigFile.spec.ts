@@ -1,9 +1,9 @@
-import { base, NativeFileReader } from '@/config/readFile'
+import { base, NativeFileReader } from '@/config/pullConfigFile'
 import { assert } from 'chai';
 import { fold } from 'fp-ts/Either'
 import sinon, { SinonSpy } from 'sinon'
 
-describe('config/readFile', () => {
+describe('config/pullConfigFile', () => {
 
   let readFileFs: NativeFileReader, readFileFsWithError: NativeFileReader;
 
