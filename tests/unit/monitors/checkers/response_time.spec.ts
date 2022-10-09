@@ -98,16 +98,5 @@ describe('monitors/checkers/response_time', function() {
         assert.equal(result, genericError);
       })
   )
-
-  // it('Does not resolve twice', () => 
-  //   new Promise(resolve => {
-  //     resolve(null);
-  //     resolve(null);
-  //   })
-  //     .then(result => {
-  //       console.log('got result', result);
-        
-  //     })
-  // )
   
 })
