@@ -6,7 +6,9 @@
   "author": "marius321967 <marius.dras@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild --bundle ./src/index.js --outdir=dist --minify --sourcemap",
+    "build": "esbuild --bundle ./src/index.ts --outdir=dist --minify --sourcemap --platform=node",
+    "postbuild": "mv dist/index.js dist/index.cjs && mv dist/index.js.map dist/index.cjs.map",
+    "start": "node dist/index.cjs",
     "ts-mocha": "mocha -r ts-node/register -r tsconfig-paths/register",
     "test:types": "yarn tsc --noEmit",
     "test:unit": "yarn ts-mocha 'tests/unit/**/*.spec.ts'",
