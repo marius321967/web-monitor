@@ -1,5 +1,6 @@
 import { Config } from '@/config/Config'
 import { ConfigSetter, setConfig } from '@/config/container'
+import logger from '@/logger'
 import { MonitorStopper } from '@/monitors/MonitorStopper'
 import startMonitors, { MonitorsStarter } from '@/startMonitors'
 
@@ -8,6 +9,7 @@ export type ValidConfigHandler = (config: Config) => Promise<MonitorStopper[]>
 export const base =
   (setConfig: ConfigSetter, startMonitors: MonitorsStarter): ValidConfigHandler =>
   (config) => {
+    logger.info('Configuration OK');
     setConfig(config);
 
     return startMonitors(config);

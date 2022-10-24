@@ -7,7 +7,7 @@ export const base =
     (shutdown: AppShutdown): InvalidConfigHandler => 
     /** Reports & shuts down the application  */
     (error) => {
-        logger.error({ message: error });
+        logger.info('Configuration invalid');
         logger.info('Shutting down due to configuration error');
 
         shutdown();
