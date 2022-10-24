@@ -66,7 +66,7 @@ describe('monitors/checkers/response_time', function() {
     return base(delayedSender(2000), intervalConverter(1000))(monitor)
       .then(() => {
         const endTime = performance.now();
-        const duration = Math.round(endTime - startTime);
+        const duration = Math.ceil(endTime - startTime);
 
         assert.isBelow(duration, 2000);
         assert.isAtLeast(duration, 1000);
