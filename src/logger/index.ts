@@ -26,10 +26,10 @@ const emptyTransports: transport[] = [
   new transports.Stream({ stream: new PassThrough() }) 
 ]
 
-const disableLogging = process.env.NODE_ENV == 'test';
+const disableLogging = process.env.NODE_ENV == 'test' && !has('LOG_LEVEL', process.env);
 const selectedTransports: transport[] = (disableLogging) ? emptyTransports : prodTransports;
 
 export default createLogger({
-  level: 'info',
+  level: process.env.LOG_LEVEL || 'info',
   transports: selectedTransports
 })
