@@ -8,8 +8,8 @@ import { Config } from './config/Config'
 
 export type AppRunner = () => Promise<void>;
 
-const logConfigFail = (err: Error): Error => logger.error({ message: err }) && err;
-const logConfigOk = (config: Config): Config => logger.debug('Configuration is valid') && config;
+const logConfigFail = (err: Error): Error => logger.error('Configuration ERROR') && logger.error({ message: err }) && err;
+const logConfigOk = (config: Config): Config => logger.info('Configuration OK') && config;
 
 const startOrFail = (handleValidConfig: ValidConfigHandler, handleInvalidConfig: InvalidConfigHandler) => 
   fold(
