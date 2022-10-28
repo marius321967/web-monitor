@@ -18,7 +18,7 @@ describe('runApp', () => {
   beforeEach(() => {
     loadConfigSuccess = sinon.fake.resolves(right(sampleConfig));
     loadConfigError = sinon.fake.resolves(left(configError));
-    handleValidConfig = sinon.fake.resolves([]);
+    handleValidConfig = sinon.fake.resolves(undefined);
     handleInvalidConfig = sinon.fake();
   })
 

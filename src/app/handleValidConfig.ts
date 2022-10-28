@@ -1,16 +1,17 @@
 import { Config } from '@/config/Config'
 import { ConfigSetter, setConfig } from '@/config/container'
-import { MonitorStopper } from '@/monitors/MonitorStopper'
 import startMonitors, { MonitorsStarter } from '@/startMonitors'
+import setupTerminationHandler, { TerminationHandlerSetup } from './exit/setupTerminationHandler'
 
-export type ValidConfigHandler = (config: Config) => Promise<MonitorStopper[]>
+export type ValidConfigHandler = (config: Config) => Promise<void>
 
 export const base =
-  (setConfig: ConfigSetter, startMonitors: MonitorsStarter): ValidConfigHandler =>
+  (setConfig: ConfigSetter, startMonitors: MonitorsStarter, setupTerminationHandler: TerminationHandlerSetup): ValidConfigHandler =>
   (config) => {
     setConfig(config);
 
-    return startMonitors(config);
+    return startMonitors(config)
+      .then(setupTerminationHandler);
   }
 
-export default base(setConfig, startMonitors)
+export default base(setConfig, startMonitors, setupTerminationHandler)

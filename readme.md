@@ -11,6 +11,8 @@ Docker-based microservice monitors configured metrics and notifies administrator
     
 ## Deployment
 
+The service is not meant to be run natively on Windows OS.
+
 Requirements:
 - Docker
 
