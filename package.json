@@ -13,9 +13,27 @@
     "test:types": "yarn tsc --noEmit",
     "test:unit": "NODE_ENV=test yarn ts-mocha 'tests/unit/**/*.spec.ts'",
     "test:integration": "yarn ts-mocha 'tests/integration/**/*.spec.ts'",
-    "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'"
+    "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'",
+    "prepare": "husky install"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [
+        2,
+        "never",
+        [
+          "start-case",
+          "pascal-case"
+        ]
+      ]
+    }
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@types/chai": "^4.3.1",
     "@types/joi": "^17.2.3",
     "@types/mocha": "^9.1.1",
@@ -25,6 +43,7 @@
     "axios-mock-adapter": "^1.21.1",
     "chai": "^4.3.6",
     "esbuild": "^0.14.51",
+    "husky": "^8.0.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "sinon": "^14.0.0",
