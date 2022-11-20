@@ -41,7 +41,7 @@
           "{{major}}",
           "{{major}}.{{minor}}"
         ],
-        "dockerImage": "semantic-release-sample",
+        "dockerImage": "web-monitor",
         "dockerProject": "marius321967"
       }
     ]
