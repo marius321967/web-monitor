@@ -1,17 +1,18 @@
-name: Unit & Infrastructure Tests
+name: CI/CD
 
 on:
   push:
     branches: [ "*" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Yarn install
@@ -39,3 +40,16 @@ jobs:
           --abort-on-container-exit \
           --exit-code-from=infra-test \
           infra-test
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: yarn install
+      - run: yarn release
+        env:
+          DOCKER_REGISTRY_USER: ${{ secrets.DOCKER_REGISTRY_USER }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
