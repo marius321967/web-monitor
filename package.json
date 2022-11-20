@@ -14,11 +14,16 @@
     "test:unit": "NODE_ENV=test yarn ts-mocha 'tests/unit/**/*.spec.ts'",
     "test:integration": "yarn ts-mocha 'tests/integration/**/*.spec.ts'",
     "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release": "yarn semantic-release"
   },
   "devDependencies": {
+    "@codedependant/semantic-release-docker": "^4.1.0",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.1",
     "@types/chai": "^4.3.1",
     "@types/joi": "^17.2.3",
     "@types/mocha": "^9.1.1",
@@ -31,6 +36,7 @@
     "husky": "^8.0.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
+    "semantic-release": "^19.0.5",
     "sinon": "^14.0.0",
     "ts-mocha": "^10.0.0",
     "typescript": "^4.7.4"
