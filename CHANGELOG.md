@@ -1,3 +1,10 @@
+## [1.0.1-beta.1](https://github.com/marius321967/web-monitor/compare/v1.0.0...v1.0.1-beta.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* **port:** drop port expose from dockerfile ([efe48df](https://github.com/marius321967/web-monitor/commit/efe48df6913f1f4cfb6f37a209857d048c23055a))
+
 # 1.0.0 (2022-11-20)
 
 
