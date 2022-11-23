@@ -1,3 +1,10 @@
+## [1.0.1-beta.2](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.1...v1.0.1-beta.2) (2022-11-23)
+
+
+### Bug Fixes
+
+* **docker:** point default command to the correct file ([8fae552](https://github.com/marius321967/web-monitor/commit/8fae5528622bfeaaf6eb591e43a045f3a0b46ca0))
+
 ## [1.0.1-beta.1](https://github.com/marius321967/web-monitor/compare/v1.0.0...v1.0.1-beta.1) (2022-11-23)
 
 
