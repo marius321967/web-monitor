@@ -20,7 +20,6 @@ Steps:
 - `docker pull marius321967/web-monitor`
 - Configure Container or Compose:
   - Volumes: `/app/config` and `/app/logs`
-  - Ports: `8080`
   - Environment: `LOG_LEVEL=error/warn/info/http/verbose/debug` 
 - Edit `/config/config.yml`
 - Run the Image
