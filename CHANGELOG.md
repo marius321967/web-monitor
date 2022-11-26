@@ -1,3 +1,10 @@
+## [1.0.1-beta.3](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.2...v1.0.1-beta.3) (2022-11-26)
+
+
+### Bug Fixes
+
+* **notifications:** fix repeating notifications ([1b18a87](https://github.com/marius321967/web-monitor/commit/1b18a8727ed892883e7e8cacff0c0b672e585862))
+
 ## [1.0.1-beta.2](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.1...v1.0.1-beta.2) (2022-11-23)
 
 
