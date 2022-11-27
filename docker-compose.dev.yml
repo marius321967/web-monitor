@@ -36,6 +36,11 @@ services:
           - target
           - target2
     command: /usr/local/apache2/conf/docker/entrypoint.sh
+  mail:
+    image: tecnativa/smtp-sink
+    restart: unless-stopped
+    networks:
+      - web-monitor-dev
 
 networks:
   web-monitor-dev:
