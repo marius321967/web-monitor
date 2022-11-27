@@ -1,3 +1,10 @@
+## [1.0.1-beta.4](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.3...v1.0.1-beta.4) (2022-11-27)
+
+
+### Bug Fixes
+
+* auth_header in monitor request is optional ([0c6e3d5](https://github.com/marius321967/web-monitor/commit/0c6e3d51630b6af329ae167144ec0b36cc240d24))
+
 ## [1.0.1-beta.3](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.2...v1.0.1-beta.3) (2022-11-26)
 
 
