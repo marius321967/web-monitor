@@ -1,9 +1,10 @@
-import { MonitorRequestConfig, RequestMethod } from '@/config/Config';
+import { MonitorRequestConfig, MonitorRequestConfigComplex, RequestMethod } from '@/config/Config'
 import { Axios, AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 import sinon, { SinonSpy } from 'sinon'
 import { response as makeResponse, responseWithStatus } from '../checkers/sampleResponse'
 import { base } from '@/monitors/requests/sendAxiosRequest'
-import { assert } from 'chai';
+import { assert } from 'chai'
+import { omit } from 'ramda'
 
 
 describe('monitors/requests/sendAxiosRequest', () => {
@@ -15,6 +16,7 @@ describe('monitors/requests/sendAxiosRequest', () => {
     method: RequestMethod.GET,
     auth_header: 'Basic XYZ'
   }
+  const noAuthRequest: MonitorRequestConfigComplex = omit(['auth_header'], request);
 
   beforeEach(() => {
     response = makeResponse();
@@ -64,6 +66,17 @@ describe('monitors/requests/sendAxiosRequest', () => {
         assert.isObject(opts.headers);
         assert.isString(opts.headers?.Authorization);
         assert.equal(opts.headers?.Authorization, 'Basic XYZ');
+      })
+  )
+
+  it(
+    'Works without auth_header',
+    () => base(axios)(noAuthRequest)
+      .then(() => {
+        const opts = (axios.request as SinonSpy).firstCall.args[0] as AxiosRequestConfig;
+
+        assert.isObject(opts.headers);
+        assert.doesNotHaveAnyKeys(opts.headers, ['Authorization']);
       })
   )
 
