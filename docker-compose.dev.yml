@@ -23,6 +23,7 @@ services:
     restart: "no"
     depends_on: 
       - target
+      - mail
     networks:
       - web-monitor-dev
   target:
