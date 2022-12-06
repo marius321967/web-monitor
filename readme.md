@@ -117,8 +117,9 @@ Then edit from the host machine or by connecting to the _dev_ container from VS 
 
 ## Testing
 
-Unit test:
-`yarn test:unit`
+Unit test: `yarn test:unit`
+
+Integration test: `yarn test:integration`
 
 Infrastructure test:
 
