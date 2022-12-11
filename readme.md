@@ -2,6 +2,7 @@
 
 ![Latest version](https://shields.io/github/v/release/marius321967/web-monitor?display_name=tag&sort=semver)
 ![CI/CD status](https://github.com/marius321967/web-monitor/workflows/CI/CD/badge.svg)
+![Test coverage](https://shields.io/nycrc/marius321967/web-monitor?config=.nycrc.json)
 ![Licence](https://shields.io/github/license/marius321967/web-monitor)
 
 Docker-based microservice monitors configured metrics and notifies administrators when they fail.
