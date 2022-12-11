@@ -1,9 +1,9 @@
 # web-monitor
 
-![Latest version](https://shields.io/github/v/release/marius321967/web-monitor?display_name=tag&sort=semver)
-![CI/CD status](https://github.com/marius321967/web-monitor/workflows/CI/CD/badge.svg)
+[![Latest version](https://shields.io/github/v/release/marius321967/web-monitor?display_name=tag&sort=semver)](https://hub.docker.com/r/marius321967/web-monitor/tags)
+[![CI/CD status](https://github.com/marius321967/web-monitor/workflows/CI/CD/badge.svg)](https://github.com/marius321967/web-monitor/actions/workflows/docker-image.yml)
 ![Test coverage](https://shields.io/nycrc/marius321967/web-monitor?config=.nycrc.json)
-![Licence](https://shields.io/github/license/marius321967/web-monitor)
+[![Licence](https://shields.io/github/license/marius321967/web-monitor)](/LICENSE)
 
 Docker-based microservice monitors configured metrics and notifies administrators when they fail.
 
@@ -15,7 +15,7 @@ Docker-based microservice monitors configured metrics and notifies administrator
     - HTML element availability (via selector)
 - notifications:
     - email
-    
+
 ## Deployment
 
 The service is not meant to be run natively on Windows OS.
