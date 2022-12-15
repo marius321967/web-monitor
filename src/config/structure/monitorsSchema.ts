@@ -22,7 +22,7 @@ const requestComplexSchema = joi.object<MonitorRequestConfigComplex>({
     .messages({ 'any.only': 'string.http-method.base' }),
 
   auth_header: joi.string()
-    .required(),
+    .optional()
 });
 
 const requestSchema = joi.alternatives(

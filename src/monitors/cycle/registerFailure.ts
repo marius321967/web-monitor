@@ -8,7 +8,6 @@ import { pipe } from 'fp-ts/lib/function'
 
 /** Handles cycle failure */
 export type CycleFailureRegistrator = <T extends MonitorType>(uniqueConfig: UniqueMonitorConfig<T>, err: Error) => Promise<void>
-// send notification & update status
 
 const log = (id: string, err: Error) => logger.info('Monitor cycle failure', { id, error: err.message });
 

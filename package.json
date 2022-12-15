@@ -1,6 +1,6 @@
 {
   "name": "web-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.4",
   "repository": "git@github.com:marius321967/web-monitor.git",
   "author": "marius321967 <marius.dras@gmail.com>",
   "license": "MIT",
@@ -14,7 +14,8 @@
     "test:integration": "yarn ts-mocha 'tests/integration/**/*.spec.ts'",
     "test:infrastructure": "yarn ts-mocha 'tests/infrastructure/**/*.spec.ts'",
     "prepare": "yarn husky install",
-    "release": "yarn semantic-release"
+    "release": "yarn semantic-release",
+    "coverage": "nyc yarn test:unit"
   },
   "devDependencies": {
     "@codedependant/semantic-release-docker": "^4.1.0",
@@ -35,6 +36,7 @@
     "husky": "^8.0.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
+    "nyc": "^15.1.0",
     "semantic-release": "^19.0.5",
     "sinon": "^14.0.0",
     "ts-mocha": "^10.0.0",

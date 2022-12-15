@@ -23,6 +23,4 @@ COPY --from=build /app/dist/ /app
 VOLUME /app/config
 VOLUME /app/logs
 
-EXPOSE 80
-
-CMD ["node", "/app/index.js"]
+CMD ["node", "/app/index.cjs"]

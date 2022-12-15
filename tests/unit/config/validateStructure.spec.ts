@@ -2,7 +2,7 @@ import { assert } from 'chai'
 import validate from '@/config/validateStructure'
 import { ConfigError, Path } from '@/config/ConfigValidator'
 import sampleConfig from '../sampleConfig'
-import { dissoc } from 'ramda'
+import { dissoc, omit } from 'ramda'
 import { Config, MonitorRequestConfigComplex, MonitorType } from '@/config/Config'
 
 const expect = (result: ConfigError | null) => 
@@ -44,6 +44,7 @@ const invalidValueRquest = false;
 const malformedUrlRequest = { ...(sampleMonitor.request as MonitorRequestConfigComplex), url: 'example.com/foo.txt' };
 const unknownMethodRequest = { ...(sampleMonitor.request as MonitorRequestConfigComplex), method: 'FOO' };
 const emptyAuthHeaderRequest = { ...(sampleMonitor.request as MonitorRequestConfigComplex), auth_header: '' };
+const noAuthHeaderRequest = omit(['auth_header'], sampleMonitor.request);
 const nonNumberCodeMonitor = { ...sampleMonitor, type: MonitorType.response_time, expected_code: '200' };
 const negativeThresholdMonitor = { ...sampleMonitor, type: MonitorType.response_time, threshold: '-2 days' };
 const basicContentMatchMonitor = { ...sampleMonitor, type: MonitorType.content_match, pattern: '/(' }; // no trailing slash - not regex
@@ -94,6 +95,7 @@ describe('config/validateStructure', () => {
   it('Catches malformed request [monitor.*.request.url]', () => expect(validate(withMonitorRequest(malformedUrlRequest))).toGiveError('INVALID_URL', ['monitors', 'test', 'request', 'url']))
   it('Catches unknown method [monitor.*.request.method]', () => expect(validate(withMonitorRequest(unknownMethodRequest))).toGiveError('UNKNOWN_METHOD', ['monitors', 'test', 'request', 'method']))
   it('Catches empty [monitor.*.request.auth_header]', () => expect(validate(withMonitorRequest(emptyAuthHeaderRequest))).toGiveError('EMPTY', ['monitors', 'test', 'request', 'auth_header']))
+  it('Passes excluded [monitor.*.request.auth_header]', () => expect(validate(withMonitorRequest(noAuthHeaderRequest))).toPass())
   it('Catches non-number [monitor.*.expected_code] (type=response_code)', () => expect(validate(withMonitor(nonNumberCodeMonitor))).toGiveError('NOT_NUMBER', ['monitors', 'test', 'expected_code']))
   it('Catches malformed [monitor.*.threshold] (type=response_time)', () => expect(validate(withMonitor(negativeThresholdMonitor))).toGiveError('INVALID_FORMAT', ['monitors', 'test', 'threshold']))
   // it('Catches negative amount [monitor.*.threshold]')

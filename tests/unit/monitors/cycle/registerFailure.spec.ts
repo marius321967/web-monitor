@@ -24,7 +24,7 @@ describe('monitors/cycle/registerFailure', () => {
       })
   )
 
-  it('Uses updateStatus() afterwards', () =>
+  it('Afterwards updates status of monitor', () =>
     base(notificationRegister, updateStatus)(uniqueConfig, error)
       .then(() => {
         sinon.assert.calledOnceWithExactly(updateStatus as SinonSpy, 'contact_form', error);

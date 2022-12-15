@@ -9,11 +9,9 @@ describe('notifications/shouldNotifyError', () => {
   const error = new Error('FOO_ERR');
 
   let isRecurringError: RecurringErrorChecker;
-  let resultToken: boolean;
 
   beforeEach(() => {
-    resultToken = Symbol() as unknown as boolean;
-    isRecurringError = sinon.fake.returns(resultToken);
+    isRecurringError = sinon.fake.returns(true);
   })
 
   it('Uses isRecurringError()', () => 
@@ -23,11 +21,18 @@ describe('notifications/shouldNotifyError', () => {
       })
   )
 
-  it('Returns result from isRecurringError()', () => 
-    base(isRecurringError)(monitorId, error)
-      .then(result => {
-        assert.equal(result, resultToken);
-      })
-  )
+  it('Should notify if error is not recurring', () => {
+    isRecurringError = sinon.fake.returns(false);
+
+    return base(isRecurringError)(monitorId, error)
+      .then(result => assert.isTrue(result));
+  })
+
+  it('Should not notify if error is recurring', () => {
+    isRecurringError = sinon.fake.returns(true);
+
+    return base(isRecurringError)(monitorId, error)
+      .then(result => assert.isFalse(result));
+  })
 
 })
