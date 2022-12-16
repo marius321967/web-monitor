@@ -1,3 +1,13 @@
+## [1.0.1](https://github.com/marius321967/web-monitor/compare/v1.0.0...v1.0.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* auth_header in monitor request is optional ([0c6e3d5](https://github.com/marius321967/web-monitor/commit/0c6e3d51630b6af329ae167144ec0b36cc240d24))
+* **docker:** point default command to the correct file ([8fae552](https://github.com/marius321967/web-monitor/commit/8fae5528622bfeaaf6eb591e43a045f3a0b46ca0))
+* **notifications:** fix repeating notifications ([1b18a87](https://github.com/marius321967/web-monitor/commit/1b18a8727ed892883e7e8cacff0c0b672e585862))
+* **port:** drop port expose from dockerfile ([efe48df](https://github.com/marius321967/web-monitor/commit/efe48df6913f1f4cfb6f37a209857d048c23055a))
+
 ## [1.0.1-beta.4](https://github.com/marius321967/web-monitor/compare/v1.0.1-beta.3...v1.0.1-beta.4) (2022-11-27)
 
 
