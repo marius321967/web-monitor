@@ -9,6 +9,7 @@
     "postbuild": "mv dist/index.js dist/index.cjs && mv dist/index.js.map dist/index.cjs.map",
     "start": "node dist/index.cjs",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register",
+    "test-watch": "yarn test -w --watch-files '**/*.ts'",
     "test:types": "yarn tsc --noEmit",
     "test:unit": "NODE_ENV=test yarn test 'tests/unit/**/*.spec.ts'",
     "test:integration": "yarn test 'tests/integration/**/*.spec.ts'",
