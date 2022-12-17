@@ -16,7 +16,10 @@ const expect = (result: ConfigError | null) =>
       assert.equal(result?.message, expectedMessage);
     },
 
-    toPass: () => assert.isNull(result, 'Expected to be valid')
+    toPass: () => {
+      if (result !== null)
+        assert.fail(`Expected to be valid, instead got [${result.path}]: ${result.message}`);
+    }
   })
 
 const sampleMonitor = sampleConfig.monitors.contact_form;
