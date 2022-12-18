@@ -12,6 +12,7 @@
     "test-watch": "yarn test -w --watch-files '**/*.ts'",
     "test:types": "yarn tsc --noEmit",
     "test:unit": "NODE_ENV=test yarn test 'tests/unit/**/*.spec.ts'",
+    "test-watch:unit": "NODE_ENV=test yarn test-watch 'tests/unit/**/*.spec.ts'",
     "test:integration": "yarn test 'tests/integration/**/*.spec.ts'",
     "test:infrastructure": "yarn test 'tests/infrastructure/**/*.spec.ts'",
     "prepare": "yarn husky install",
