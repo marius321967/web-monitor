@@ -9,10 +9,16 @@ describe('app', function() {
 
   this.timeout(10_000);
 
-  const setConfigEnv = (config: Config) => {
-    const configJson = JSON.stringify(config);
-    process.env.CONFIG = Buffer.from(configJson).toString('base64');
+  const setConfigEnv = (config: Config | null) => {
+    if (config !== null) {
+      const configJson = JSON.stringify(config);
+      process.env.CONFIG = Buffer.from(configJson).toString('base64');
+    } else {
+      delete process.env.CONFIG;
+    }
   }
+
+  afterEach(() => setConfigEnv(null))
 
   // Close app if initiated
   let result: Either<AppStopper, null>;
