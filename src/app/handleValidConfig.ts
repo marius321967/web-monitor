@@ -17,7 +17,7 @@ export const base =
   (setConfig: ConfigSetter, startMonitors: MonitorsStarter, setupTerminationHandler: TerminationHandlerSetup): ValidConfigHandler =>
   (config) => {
     if (hasNoMonitors(config)) {
-      logger.info('No monitors found in config. Continuing without starting monitoring.');
+      logger.info('No monitors found in config: closing');
       return Promise.resolve( right(null) );
     }
 
