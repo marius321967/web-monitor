@@ -1,8 +1,14 @@
-import { Either, isRight } from 'fp-ts/lib/Either'
+import { Either, isRight, Right } from 'fp-ts/lib/Either'
+import logger from '../logger'
 import pullConfigEnv, { ConfigEnvPuller } from './pullConfigEnv'
 import pullConfigFile, { ConfigFilePuller } from './pullConfigFile'
 
 export type ConfigPuller = () => Promise<Either<Error, string>>
+
+const envFound = (result: Right<string>) => {
+  logger.debug('Found config in environment variable');
+  return Promise.resolve(result);
+}
 
 export const base = 
   (pullConfigEnv: ConfigEnvPuller, pullConfigFile: ConfigFilePuller): ConfigPuller =>
@@ -10,7 +16,7 @@ export const base =
     const envResult = pullConfigEnv();
 
     return (isRight(envResult))
-      ? Promise.resolve(envResult)
+      ? envFound(envResult)
       : pullConfigFile();
   }
 
