@@ -4,7 +4,7 @@ import { assert } from 'chai'
 
 describe('monitors/checkers/ssl_validity', function() {
 
-  this.timeout(5_000);
+  this.timeout(10_000);
 
   const monitor: SslMonitor = {
     label: 'Foo',

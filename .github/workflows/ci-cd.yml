@@ -15,23 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Yarn install
-      uses: borales/actions-yarn@v3.0.0
+    - uses: actions/setup-node@v3
       with:
-        cmd: install
-    - name: Check typing
-      uses: borales/actions-yarn@v3.0.0
-      with:
-        cmd: test:types
-    - name: Unit tests
-      uses: borales/actions-yarn@v3.0.0
-      with:
-        cmd: test:unit
-    - name: Integration tests
-      uses: borales/actions-yarn@v3.0.0
-      with:
-        cmd: test:integration
-    - name: Infrastructure tests
+        node-version: 18
+    - run: yarn install
+    - run: yarn test:types
+    - run: yarn test:unit
+    - run: yarn test:integration
+    - name: yarn test:infrastructure
       env:
         CONFIG: ${{ secrets.CONFIG }}
       run: >
