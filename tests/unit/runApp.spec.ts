@@ -1,12 +1,16 @@
-import { ValidConfigHandler } from '@/app/handleValidConfig'
+import { DaemonStopper, ValidConfigHandler } from '@/app/handleValidConfig'
 import { InvalidConfigHandler } from '@/app/handleInvalidConfig'
 import { ConfigLoader } from '@/loadConfig'
 import { base } from '@/runApp'
-import { left, right } from 'fp-ts/lib/Either'
+import { isLeft, isRight, left, right } from 'fp-ts/lib/Either'
 import sinon, { SinonSpy } from 'sinon'
 import sampleConfig from './sampleConfig'
+import { assert } from 'chai'
 
 describe('runApp', () => {
+
+  const daemonStopper: DaemonStopper = Symbol() as unknown as DaemonStopper;
+  const validConfigResult = left(daemonStopper);
 
   let loadConfigSuccess: ConfigLoader, 
     loadConfigError: ConfigLoader,
@@ -18,7 +22,7 @@ describe('runApp', () => {
   beforeEach(() => {
     loadConfigSuccess = sinon.fake.resolves(right(sampleConfig));
     loadConfigError = sinon.fake.resolves(left(configError));
-    handleValidConfig = sinon.fake.resolves(undefined);
+    handleValidConfig = sinon.fake.resolves(validConfigResult);
     handleInvalidConfig = sinon.fake();
   })
 
@@ -29,20 +33,38 @@ describe('runApp', () => {
       })
   )
 
-  it('Uses valid config handler', () =>
-    base(loadConfigSuccess, handleValidConfig, handleInvalidConfig)()
-      .then(() => {
-        sinon.assert.calledOnceWithExactly(handleValidConfig as SinonSpy, sampleConfig);
-        sinon.assert.notCalled(handleInvalidConfig as SinonSpy);
-      })
-  )
+  describe('When config is valid', () => {
+    
+    let result;
 
-  it('Uses invalid config handler', () =>
-    base(loadConfigError, handleValidConfig, handleInvalidConfig)()
-      .then(() => {
-        sinon.assert.calledOnceWithExactly(handleInvalidConfig as SinonSpy, configError);
-        sinon.assert.notCalled(handleValidConfig as SinonSpy);
-      })
-  )
+    beforeEach(async () => result = await base(loadConfigSuccess, handleValidConfig, handleInvalidConfig)())
+
+    it('Uses valid config handler', () => {
+      sinon.assert.calledOnceWithExactly(handleValidConfig as SinonSpy, sampleConfig);
+      sinon.assert.notCalled(handleInvalidConfig as SinonSpy);
+    })
+
+    it('Returns callback|null from handleValidConfig', () => {
+      assert.equal(result, validConfigResult);
+    })
+
+  })
+
+  describe('When config is invalid', () => {
+    
+    let result;
+
+    beforeEach(async () => result = await base(loadConfigError, handleValidConfig, handleInvalidConfig)())
+
+    it('Uses invalid config handler', () => {
+      sinon.assert.calledOnceWithExactly(handleInvalidConfig as SinonSpy, configError);
+      sinon.assert.notCalled(handleValidConfig as SinonSpy);
+    })
+
+    it('Returns null result', () => {
+      assert.isTrue(isRight(result));
+    })
+
+  })
 
 })
