@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/marius321967/web-monitor/compare/v1.0.1...v1.1.0) (2022-12-24)
+
+
+### Bug Fixes
+
+* **config:** different log message when no monitors ([5640a3c](https://github.com/marius321967/web-monitor/commit/5640a3c5927a988a125ed6de750cdd62da2add9f))
+
+
+### Features
+
+* **config:** gracefully close app if no monitors in config ([e845525](https://github.com/marius321967/web-monitor/commit/e8455254f2056ebb95b6ea64402a1dd3091dc9dc))
+
 ## [1.0.1](https://github.com/marius321967/web-monitor/compare/v1.0.0...v1.0.1) (2022-12-16)
 
 
