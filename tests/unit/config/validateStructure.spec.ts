@@ -16,7 +16,10 @@ const expect = (result: ConfigError | null) =>
       assert.equal(result?.message, expectedMessage);
     },
 
-    toPass: () => assert.isNull(result, 'Expected to be valid')
+    toPass: () => {
+      if (result !== null)
+        assert.fail(`Expected to be valid, instead got [${result.path}]: ${result.message}`);
+    }
   })
 
 const sampleMonitor = sampleConfig.monitors.contact_form;
@@ -79,8 +82,8 @@ describe('config/validateStructure', () => {
   
   it('Catches extra root-level field', () => expect(validate({ ...sampleConfig, foo: 'bar' })).toGiveError('UNUSED', ['foo']));
   
-  it('Catches non-object [monitor.*]', () => expect(validate([])).toGiveError('NOT_OBJECT'))
-  it('Catches empty [monitor]')
+  it('Catches non-object [.]', () => expect(validate([])).toGiveError('NOT_OBJECT'))
+  it('Passes empty [monitor]', () => expect(validate({ ...sampleConfig, monitors: {} })).toPass());
   it('Catches missing fields [monitor.*]', () => expect(validate(withMonitor(missingFieldMonitor))).toGiveError('MISSING', ['monitors', 'test', 'request']))
   it('Catches unknown fields [monitor.*]', () => expect(validate(withMonitor(extraFieldMonitor))).toGiveError('UNUSED', ['monitors', 'test', 'foo']))
   it('Catches non-string [monitor.*.label]', () => expect(validate(withMonitor(nonStringLabelMonitor))).toGiveError('NOT_STRING', ['monitors', 'test', 'label']))

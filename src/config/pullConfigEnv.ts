@@ -15,7 +15,7 @@ const attemptDecode = (input: string): Either<null, string> => {
 export const base =
   (env: NodeJS.ProcessEnv): ConfigEnvPuller =>
   () => 
-    ('CONFIG' in env)
+    ('CONFIG' in env && env.CONFIG !== undefined)
       ? attemptDecode(env.CONFIG as string)
       : left(null);
 

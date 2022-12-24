@@ -2,6 +2,7 @@ import { TerminationCallback, TerminationCallbackBuilder } from '@/app/exit/buil
 import sinon, { SinonSpy } from 'sinon'
 import { base } from '@/app/exit/setupTerminationHandler'
 import { MonitorStopper } from '@/monitors/MonitorStopper'
+import { assert } from 'chai'
 
 describe('app/exit/setupTerminationHandler', () => {
 
@@ -30,6 +31,15 @@ describe('app/exit/setupTerminationHandler', () => {
       base(nodeProcess, buildTerminationCallback)(stoppers);
 
       sinon.assert.calledOnceWithExactly(nodeProcess.on as SinonSpy, 'SIGINT', terminationCallback);
+    }
+  )
+
+  it(
+    'Returns termination callback', 
+    () => {
+      const result = base(nodeProcess, buildTerminationCallback)(stoppers);
+
+      assert.equal(result, terminationCallback);
     }
   )
 

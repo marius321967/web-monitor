@@ -19,6 +19,13 @@ describe('config/pullConfigEnv', () => {
     assert.isTrue(isLeft(result));
   })
 
+  it('Returns null if present but undefined', () => {
+    const pullConfigEnv = base({ CONFIG: undefined }); 
+    const result = pullConfigEnv();
+
+    assert.isTrue(isLeft(result));
+  })
+
   it('Returns null if not Base64', () => {
     const pullConfigEnv = base({ CONFIG: '-' }); 
     const result = pullConfigEnv();
