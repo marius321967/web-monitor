@@ -9,6 +9,11 @@ describe('app', function() {
 
   this.timeout(10_000);
 
+  let oldConfig;
+  
+  before(() => oldConfig = process.env.CONFIG)
+  after(() => process.env.CONFIG = oldConfig)
+
   const setConfigEnv = (config: Config | null) => {
     if (config !== null) {
       const configJson = JSON.stringify(config);
