@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/marius321967/web-monitor/compare/v1.1.0...v1.2.0) (2022-12-26)
+
+
+### Features
+
+* bump version for using alpine ([6ec6094](https://github.com/marius321967/web-monitor/commit/6ec6094e9a549816242aa4f399ec7fa0bd099aff))
+
 # [1.1.0](https://github.com/marius321967/web-monitor/compare/v1.0.1...v1.1.0) (2022-12-24)
 
 
