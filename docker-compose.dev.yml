@@ -13,7 +13,7 @@ services:
     networks:
       - web-monitor-dev
   infra-test:
-    image: node:18-alpine
+    image: node:18
     working_dir: /app
     command: yarn test:infrastructure
     environment:
