@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  monitor:
+    build: .
+    depends_on:
+      - mail
+  mail:
+    image: tecnativa/smtp-sink
