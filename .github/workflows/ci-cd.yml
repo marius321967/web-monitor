@@ -31,8 +31,19 @@ jobs:
           --abort-on-container-exit \
           --exit-code-from=infra-test \
           infra-test
+
+  test-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - 
+        name: docker-compose up (build)
+        run: docker-compose -f docker-compose.ci.yml up --build --exit-code-from=monitor monitor
+
   release:
-    needs: test
+    needs: 
+      - test
+      - test-docker-image
     runs-on: ubuntu-latest
     permissions:
       contents: write

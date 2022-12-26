@@ -1,11 +1,11 @@
-FROM node:18 as build
+FROM node:18-alpine as build
 
 WORKDIR /app
 
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
-RUN yarn install
+RUN yarn install --ignore-scripts
 
 COPY src/ /app/src
 COPY tests/ /app/tests
@@ -14,7 +14,7 @@ COPY tsconfig.json /app/tsconfig.json
 RUN yarn build
 
 # ---
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /app
 
