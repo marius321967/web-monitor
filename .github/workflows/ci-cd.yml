@@ -36,8 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup config dir
-        run: mkdir ./config
       - name: Setup config file
         run: |
           echo "ewogICJtb25pdG9ycyI6IHt9LAogICJub3RpZnkiOiB7CiAgICAiYWRtaW4iOiB7CiAgICAgICJlbWFpbCI6ICJhZG1pbkBleGFtcGxlLmNvbSIKICAgIH0KICB9LAogICJlbWFpbF9ub3RpZmllciI6IHsKICAgICJob3N0IjogIm1haWwiLAogICAgInBvcnQiOiAyNSwKICAgICJhdXRoIjogeyAidXNlciI6ICJtciIsICJwYXNzIjogImZvbyIgfQogIH0KfQo" \
