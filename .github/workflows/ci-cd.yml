@@ -36,8 +36,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - 
-        name: docker-compose up (build)
+      - name: Setup config file
+        run: |
+          echo "{
+            "monitors": {},
+            "notify": {
+              "admin": {
+                "email": "admin@example.com"
+              }
+            },
+            "email_notifier": {
+              "host": "mail",
+              "port": 25,
+              "auth": { "user": "mr", "pass": "foo" }
+            }
+          }
+          " > ./config/config.yml
+      - name: docker-compose up (build)
         run: docker-compose -f docker-compose.ci.yml up --build --exit-code-from=monitor monitor
 
   release:

@@ -3,9 +3,8 @@ version: '3'
 services:
   monitor:
     build: .
-    environment:
-      # config with empty monitors to get graceful exit
-      - CONFIG=ewogICJtb25pdG9ycyI6IHt9LAogICJub3RpZnkiOiB7CiAgICAiYWRtaW4iOiB7CiAgICAgICJlbWFpbCI6ICJhZG1pbkBleGFtcGxlLmNvbSIKICAgIH0KICB9LAogICJlbWFpbF9ub3RpZmllciI6IHsKICAgICJob3N0IjogIm1haWwiLAogICAgInBvcnQiOiAyNSwKICAgICJhdXRoIjogeyAidXNlciI6ICJtciIsICJwYXNzIjogImZvbyIgfQogIH0KfQo=
+    volumes:
+      - ./config:/app/config
     depends_on:
       - mail
   mail:
