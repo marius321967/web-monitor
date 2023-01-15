@@ -18,8 +18,6 @@ Docker-based microservice monitors configured metrics and notifies administrator
 
 ## Deployment
 
-The service is not meant to be run natively on Windows OS.
-
 Requirements:
 - Docker
 
@@ -33,7 +31,7 @@ Steps:
 
 ## config.yml
 
-web-monitor requires that you set up:
+web-monitor requires you to set up:
 - endpoints to monitor
 - people to notify
 - credentials for notification services
@@ -112,6 +110,7 @@ email_notifier:
 Also see [config/config.example.yml](/config/config.example.yml)
 
 ## Development
+
 Spin up a dev environment with Docker:
 
 ```bash
