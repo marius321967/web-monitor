@@ -32,9 +32,9 @@ Steps:
 ## config.yml
 
 web-monitor requires you to set up:
-- endpoints to monitor
-- people to notify
-- credentials for notification services
+- endpoints to monitor (`monitors`)
+- people to notify (`notify`)
+- credentials for notification services (`email_notifier`)
 
 ```yml
 monitors:
@@ -43,66 +43,46 @@ monitors:
     type: ssl_validity|response_code|response_time|content_match|element_match
     interval: <integer> seconds|minutes|hours|days|weeks
     request: https://example.com
-```
 
-`request` with a string value will initiate a GET request. For more configurable requests, provide an object:
-
-```yml
+    # string value will initiate a GET request. For more configurable requests, provide an object:
     request:
       url: https://example.com/form_submit
       method: GET|POST|DELETE|HEAD|OPTIONS|PUT|PATCH
+      # (auth_header is optional)
       auth_header: Basic Zm9vOmJhcg==
-```
 
-*`auth_header` is optional.*
-
-Some monitors require additional parameters:
-```yml
+    # some monitors require additional parameters
     type: response_code
     expected_code: 200
-```
 
-```yml
+    # response_time monitor will send a notification if response takes longer than threshold
     type: response_time
     threshold: 20 seconds
-```
 
-*`response_time` monitor will send a notification if response takes longer than `threshold`.*
-
-```yml
     type: content_match
     pattern: mailto:john@example.com
+    # pattern supports regex if surrounded by forward slashes. Flags after slashes are not supported.
+    # see Node's support for RegEx:
+    # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#browser_compatibility
     pattern: /mailto:\w+@example.com/
-```
 
-*`pattern` supports regex if surrounded by forward slashes (see Node's support for [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#browser_compatibility)). Flags after slashes are not supported.*
-
-```yml
     type: element_match
+    # pattern supports CSS-style selectors provided by cheerio (https://cheerio.js.org/)
     pattern: body .contact-form
-```
 
-*`pattern` supports CSS-style selectors (provided by [cheerio](https://cheerio.js.org/)).*
-
-Notification recipients are listed as such:
-
-```yml
+# notification recipients are listed as such
 notify:
   <recipient-id>:
+    # (web-monitor currently only notifies by email)
     email: admin@example.com
   <recipient-id>:
     email: johndoe@example.com
-```
 
-web-monitor currently only notifies by email.
-
-Finally, the mail server is set up:
-
-```yml
+# finally, the mail server is set up
 email_notifier:
   host: smtp.mailtrap.io
   port: 2525
-  auth: 
+  auth:
     user: foo
     pass: bar
 ```
