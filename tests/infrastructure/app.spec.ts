@@ -12,7 +12,12 @@ describe('app', function() {
   let oldConfig;
   
   before(() => oldConfig = process.env.CONFIG)
-  after(() => process.env.CONFIG = oldConfig)
+  after(() => {
+    if (oldConfig === undefined)
+      delete process.env.CONFIG;
+    else 
+      process.env.CONFIG = oldConfig;
+  })
 
   const setConfigEnv = (config: Config | null) => {
     if (config !== null) {
