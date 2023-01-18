@@ -96,6 +96,7 @@ export type EmailNotifierAuthConfig = {
 export type EmailNotifierConfig = {
     host: string,
     port: number,
+    secure: boolean,
     auth: EmailNotifierAuthConfig
 }
 
