@@ -82,6 +82,7 @@ notify:
 email_notifier:
   host: smtp.mailtrap.io
   port: 2525
+  secure: true # use TLS (see nodemailer's secure parameter)
   auth:
     user: foo
     pass: bar
