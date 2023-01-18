@@ -14,6 +14,7 @@ describe('notifications/sendNotification', function() {
       email_notifier: {
         host: 'foo.bar',
         port: 25,
+        secure: false,
         auth: { user: 'foo', pass: 'bar' }
       }
     });

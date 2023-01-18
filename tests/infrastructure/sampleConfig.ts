@@ -37,6 +37,7 @@ const sampleConfig: Config = {
   email_notifier: {
     host: 'mail',
     port: 25,
+    secure: false,
     auth: { user: 'mr', pass: 'foo' }
   }
 } as const;
