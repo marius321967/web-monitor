@@ -40,6 +40,7 @@ const sampleConfig: Config = {
   email_notifier: {
     host: 'smtp.mailtrap.io',
     port: 2525,
+    secure: true,
     auth: {
       user: 'foo',
       pass: 'bar'

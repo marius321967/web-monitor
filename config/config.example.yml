@@ -41,6 +41,7 @@ notify:
 email_notifier:
   host: smtp.mailtrap.io
   port: 2525
-  auth: 
+  secure: true
+  auth:
     user: foo
     pass: bar

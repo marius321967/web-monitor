@@ -10,6 +10,10 @@ export default joi.object({
     .port()
     .required(),
 
+  secure: joi.bool()
+    .strict()
+    .required(),
+
   auth: joi.object({
     user: joi.string()
       .required(),
