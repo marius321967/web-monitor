@@ -3,41 +3,40 @@ import sinon, { SinonSpy } from 'sinon'
 import { base } from '@/app/exit/setupTerminationHandler'
 import { MonitorStopper } from '@/monitors/MonitorStopper'
 import { assert } from 'chai'
+import { SignalListenerRegistrator } from '../../../../src/app/exit/registerSignalListeners'
 
 describe('app/exit/setupTerminationHandler', () => {
 
   const terminationCallback = Symbol() as unknown as TerminationCallback;
   const stopper = Symbol() as unknown as MonitorStopper;
   const stoppers = [ stopper ];
-  let nodeProcess: NodeJS.Process, buildTerminationCallback: TerminationCallbackBuilder;
+  let buildTerminationCallback: TerminationCallbackBuilder;
+  let registerSignalListeners: SignalListenerRegistrator;
 
   beforeEach(() => {
-    nodeProcess = { on: sinon.fake.returns(nodeProcess) } as unknown as NodeJS.Process;
     buildTerminationCallback = sinon.fake.returns(terminationCallback);
+    registerSignalListeners = sinon.fake();
   })
 
   it(
     'Builds termination callback', 
     () => {
-      base(nodeProcess, buildTerminationCallback)(stoppers);
+      base(buildTerminationCallback, registerSignalListeners)(stoppers);
 
       sinon.assert.calledOnceWithExactly(buildTerminationCallback as SinonSpy, stoppers);
     }
   )
 
-  it(
-    'Uses nodeProcess.on("SIGINT")',
-    () => {
-      base(nodeProcess, buildTerminationCallback)(stoppers);
+  it('Registers signal listeners', () => {
+    base(buildTerminationCallback, registerSignalListeners)(stoppers);
 
-      sinon.assert.calledOnceWithExactly(nodeProcess.on as SinonSpy, 'SIGINT', terminationCallback);
-    }
-  )
+    sinon.assert.calledOnceWithExactly(registerSignalListeners as SinonSpy, terminationCallback);
+  })
 
   it(
     'Returns termination callback', 
     () => {
-      const result = base(nodeProcess, buildTerminationCallback)(stoppers);
+      const result = base(buildTerminationCallback, registerSignalListeners)(stoppers);
 
       assert.equal(result, terminationCallback);
     }
