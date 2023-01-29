@@ -1,6 +1,7 @@
 import logger from '@/logger';
 import { MonitorStopper } from '@/monitors/MonitorStopper'
 import buildTerminationCallback, { TerminationCallbackBuilder } from './buildTerminationCallback'
+import registerSignalListeners, { SignalListenerRegistrator } from './registerSignalListeners'
 
 export type TerminationHandler = () => void;
 
@@ -11,10 +12,10 @@ export type TerminationHandler = () => void;
 export type TerminationHandlerSetup = (stoppers: MonitorStopper[]) => TerminationHandler;
 
 export const base = 
-  (nodeProcess: NodeJS.Process, buildTerminationCallback: TerminationCallbackBuilder): TerminationHandlerSetup =>
+  (buildTerminationCallback: TerminationCallbackBuilder, registerSignalListeners: SignalListenerRegistrator): TerminationHandlerSetup =>
   (stoppers) => {
     const terminationCallback = buildTerminationCallback(stoppers);
-    nodeProcess.on('SIGINT', terminationCallback);
+    registerSignalListeners(terminationCallback);
 
     logger.debug('Set up process termination handler');
 
@@ -22,4 +23,4 @@ export const base =
   }
 
 /** Stops all monitors on process exit event */
-export default base(process, buildTerminationCallback);
+export default base(buildTerminationCallback, registerSignalListeners);
