@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/marius321967/web-monitor/compare/v1.2.0...v1.2.1) (2023-01-29)
+
+
+### Bug Fixes
+
+* **compose:** terminate on SIGTERM as well ([43e648c](https://github.com/marius321967/web-monitor/commit/43e648cc7377c48d9ee95df8b431ec6196f473f1))
+
 # [1.2.0](https://github.com/marius321967/web-monitor/compare/v1.1.0...v1.2.0) (2022-12-26)
 
 
