@@ -39,9 +39,9 @@ notify:
     email: johndoe@example.com
 
 email_notifier:
-  host: smtp.mailtrap.io
-  port: 2525
-  secure: true
+  host: sandbox.smtp.mailtrap.io
+  port: 465
+  secure: false
   auth:
     user: foo
     pass: bar

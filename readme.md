@@ -8,30 +8,33 @@
 Docker-based microservice monitors configured metrics and notifies administrators when they fail.
 
 - metrics:
-    - SSL validity (revocation & pubkey pinning not checked)
-    - response code
-    - response time
-    - response content match (Regex)
-    - HTML element availability (via selector)
+  - SSL validity (revocation & pubkey pinning not checked)
+  - response code
+  - response time
+  - response content match (Regex)
+  - HTML element availability (via selector)
 - notifications:
-    - email
+  - email
 
 ## Deployment
 
 Requirements:
+
 - Docker
 
 Steps:
+
 - `docker pull marius321967/web-monitor`
 - Configure Container or Compose:
   - Volumes: `/app/config` and `/app/logs`
-  - Environment: `LOG_LEVEL=error/warn/info/http/verbose/debug` 
+  - Environment: `LOG_LEVEL=error/warn/info/http/verbose/debug`
 - Edit `/config/config.yml` (see below)
 - Run the Image
 
 ## config.yml
 
 web-monitor requires you to set up:
+
 - endpoints to monitor (`monitors`)
 - people to notify (`notify`)
 - credentials for notification services (`email_notifier`)
@@ -80,9 +83,9 @@ notify:
 
 # finally, the mail server is set up
 email_notifier:
-  host: smtp.mailtrap.io
-  port: 2525
-  secure: true # use TLS (see nodemailer's secure parameter)
+  host: sandbox.smtp.mailtrap.io
+  port: 465
+  secure: false
   auth:
     user: foo
     pass: bar
