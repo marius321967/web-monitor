@@ -16,6 +16,8 @@ Docker-based microservice monitors configured metrics and notifies administrator
 - notifications:
   - email
 
+Note: response body metrics only check the content without evaluating it, therefore they do not work with Single Page Applications.
+
 ## Deployment
 
 Requirements:
