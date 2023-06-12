@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 ```
 
-## config.yml
+### config.yml
 
 web-monitor requires you to set up:
 
@@ -105,6 +105,14 @@ email_notifier:
 ```
 
 Also see [config/config.example.yml](/config/config.example.yml)
+
+### Environment variables
+
+- `LOG_LEVEL=error/warn/info/http/verbose/debug`
+
+### Logging
+
+`web-monitor.log` will be created in the logs directory - it will contain the same logs as in stdout. No cleanup or file splitting is done by the service.
 
 ## Development
 
