@@ -12,7 +12,7 @@ Docker-based microservice monitors configured metrics and notifies administrator
   - response code
   - response time
   - response content match (Regex)
-  - HTML element availability (via selector)
+  - HTML element availability via CSS [selector](https://github.com/fb55/css-select/blob/master/README.md#supported-selectors)
 - notifications:
   - email
 
