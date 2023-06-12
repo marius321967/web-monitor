@@ -24,12 +24,25 @@ Requirements:
 
 Steps:
 
-- `docker pull marius321967/web-monitor`
-- Configure Container or Compose:
-  - Volumes: `/app/config` and `/app/logs`
-  - Environment: `LOG_LEVEL=error/warn/info/http/verbose/debug`
-- Edit `/config/config.yml` (see below)
-- Run the Image
+- Configure `docker-compose.yml` (see below)
+- Edit `config/config.yml` (see below)
+- Run `docker-compose up`
+
+### docker-compose.yml
+
+```yml
+version: "3"
+
+services:
+  web-monitor:
+    image: marius321967/web-monitor
+    environment:
+      - LOG_LEVEL=info
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    restart: unless-stopped
+```
 
 ## config.yml
 
