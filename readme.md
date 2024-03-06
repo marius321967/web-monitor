@@ -8,30 +8,48 @@
 Docker-based microservice monitors configured metrics and notifies administrators when they fail.
 
 - metrics:
-    - SSL validity (revocation & pubkey pinning not checked)
-    - response code
-    - response time
-    - response content match (Regex)
-    - HTML element availability (via selector)
+  - SSL validity (revocation & pubkey pinning not checked)
+  - response code
+  - response time
+  - response content match (Regex)
+  - HTML element availability via CSS [selector](https://github.com/fb55/css-select/blob/master/README.md#supported-selectors)
 - notifications:
-    - email
+  - email
+
+Note: response body metrics only check the content without evaluating it, therefore they do not work with Single Page Applications.
 
 ## Deployment
 
 Requirements:
+
 - Docker
 
 Steps:
-- `docker pull marius321967/web-monitor`
-- Configure Container or Compose:
-  - Volumes: `/app/config` and `/app/logs`
-  - Environment: `LOG_LEVEL=error/warn/info/http/verbose/debug` 
-- Edit `/config/config.yml` (see below)
-- Run the Image
 
-## config.yml
+- Configure `docker-compose.yml` (see below)
+- Edit `config/config.yml` (see below)
+- Run `docker-compose up`
+
+### docker-compose.yml
+
+```yml
+version: "3"
+
+services:
+  web-monitor:
+    image: marius321967/web-monitor
+    environment:
+      - LOG_LEVEL=info
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    restart: unless-stopped
+```
+
+### config.yml
 
 web-monitor requires you to set up:
+
 - endpoints to monitor (`monitors`)
 - people to notify (`notify`)
 - credentials for notification services (`email_notifier`)
@@ -80,15 +98,23 @@ notify:
 
 # finally, the mail server is set up
 email_notifier:
-  host: smtp.mailtrap.io
-  port: 2525
-  secure: true # use TLS (see nodemailer's secure parameter)
+  host: sandbox.smtp.mailtrap.io
+  port: 465
+  secure: false
   auth:
     user: foo
     pass: bar
 ```
 
 Also see [config/config.example.yml](/config/config.example.yml)
+
+### Environment variables
+
+- `LOG_LEVEL=error/warn/info/http/verbose/debug`
+
+### Logging
+
+`web-monitor.log` will be created in the logs directory - it will contain the same logs as in stdout. No cleanup or file splitting is done by the service.
 
 ## Development
 
